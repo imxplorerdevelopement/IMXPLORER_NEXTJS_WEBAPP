@@ -24,6 +24,7 @@ export default function Preloader() {
     const removeTimer = window.setTimeout(() => {
       setIsVisible(false);
       document.body.classList.remove("loading");
+      window.dispatchEvent(new Event("imx:preloader-done"));
     }, 3000);
 
     return () => {

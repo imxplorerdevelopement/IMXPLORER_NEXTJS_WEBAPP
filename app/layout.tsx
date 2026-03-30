@@ -5,6 +5,7 @@ import {
   Manrope,
 } from "next/font/google";
 import Footer from "@/components/Footer";
+import LenisProvider from "@/components/LenisProvider";
 import Nav from "@/components/Nav";
 import Preloader from "@/components/Preloader";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -48,6 +49,7 @@ export default function RootLayout({
       className={`${cormorant.variable} ${manrope.variable} ${spartan.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-imxDark text-imxLight">
+        <LenisProvider />
         <Preloader />
         <Nav />
         <main className="flex-1">{children}</main>

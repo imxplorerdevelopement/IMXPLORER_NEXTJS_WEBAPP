@@ -294,6 +294,141 @@ body.loading {
   box-shadow: 0 6px 28px rgb(37 211 102 / 50%);
 }
 
+@keyframes kenBurns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.1) translate(-1%, 0.4%);
+  }
+}
+
+.hero-bg-img {
+  animation: kenBurns 24s ease-in-out forwards;
+}
+
+.hero-overlay-main {
+  background: linear-gradient(
+    160deg,
+    rgb(10 10 10 / 55%) 0%,
+    rgb(10 10 10 / 20%) 50%,
+    rgb(10 10 10 / 75%) 100%
+  );
+}
+
+.hero-overlay-bottom {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgb(10 10 10 / 60%) 100%
+  );
+}
+
+.hero-heading-main {
+  font-size: clamp(2.8rem, 8vw, 9.5rem);
+}
+
+.hero-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(50px);
+  filter: blur(12px);
+  transition:
+    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.9s ease;
+}
+
+.hero-word.visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.hero-divider {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-divider.visible {
+  transform: scaleX(1);
+}
+
+.hero-fade {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes scrollPulse {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scaleY(0.55);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scaleY(1);
+  }
+}
+
+.scroll-line {
+  transform-origin: top center;
+  animation: scrollPulse 2.2s ease-in-out infinite;
+}
+
+.wc-sticky,
+.phi-sticky {
+  position: sticky;
+  top: 0;
+}
+
+.wc-big-text {
+  font-size: clamp(3rem, 13vw, 15rem);
+}
+
+.wc-word {
+  color: rgb(252 249 248 / 8%);
+  transition: color 0.4s ease;
+}
+
+.wc-word.lit {
+  color: rgb(252 249 248 / 95%);
+}
+
+.wc-dot.lit {
+  color: #d6052b !important;
+}
+
+.wc-word.wc-dark {
+  color: rgb(10 10 10 / 8%);
+}
+
+.wc-word.wc-dark.lit {
+  color: rgb(10 10 10 / 88%);
+}
+
+.wc-support {
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+.wc-support.lit {
+  opacity: 1;
+}
+
+.wc-bleed {
+  background: linear-gradient(to bottom, transparent, #fcf9f8);
+}
+
 @media (min-width: 768px) {
   .nav-links {
     display: flex;
@@ -307,6 +442,18 @@ body.loading {
 
   #navbar.scrolled {
     padding: 0.6rem 0.75rem;
+  }
+
+  #wc-section {
+    height: 160vh !important;
+  }
+
+  #philosophy {
+    height: 160vh !important;
+  }
+
+  #philosophy > .phi-sticky {
+    padding-top: 2rem !important;
   }
 }
 
