@@ -4,6 +4,10 @@ import {
   League_Spartan,
   Manrope,
 } from "next/font/google";
+import Footer from "@/components/Footer";
+import Nav from "@/components/Nav";
+import Preloader from "@/components/Preloader";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -44,7 +48,11 @@ export default function RootLayout({
       className={`${cormorant.variable} ${manrope.variable} ${spartan.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-imxDark text-imxLight">
-        {children}
+        <Preloader />
+        <Nav />
+        <main className="flex-1">{children}</main>
+        <Footer />
+        <WhatsAppButton />
       </body>
     </html>
   );

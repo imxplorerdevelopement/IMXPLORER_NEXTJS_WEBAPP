@@ -1,6 +1,6 @@
 export default function Home() {
   return (
-    <main className="flex min-h-screen items-center justify-center p-8">
+    <main className="flex min-h-screen items-center justify-center p-8 pt-32">
       <section className="w-full max-w-3xl rounded-3xl border border-imxGold/40 bg-imxLight px-8 py-12 text-imxDark shadow-[0_24px_60px_rgba(0,0,0,0.35)]">
         <p className="font-brand text-xs tracking-[0.28em] text-imxRed uppercase">
           IMxplorer Migration - Day 1
