@@ -15,7 +15,7 @@ export default function Nav() {
       journeys: pathname === "/" ? "#services-section" : "/#services-section",
       philosophy: pathname === "/" ? "#philosophy" : "/#philosophy",
       luxe: pathname === "/" ? "#hni-section" : "/#hni-section",
-      contact: pathname === "/" ? "#contact" : "/#contact",
+      contact: "/contact",
     }),
     [pathname],
   );
@@ -47,7 +47,7 @@ export default function Nav() {
           <Link href="/" className="flex cursor-pointer items-center">
             <Image
               src="/assets/images/logo_white.png"
-              alt="IMxplorer — The Travel Co."
+              alt="IMxplorer - The Travel Co."
               width={144}
               height={28}
               className="nav-logo"

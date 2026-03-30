@@ -216,7 +216,7 @@ export default function JourneySection() {
       id="journey-section"
       ref={sectionRef}
       className="journey-dynamic relative bg-[#0a0a0a]"
-      style={{ height: "320vh" }}
+      style={{ height: "360vh" }}
     >
       <div id="journey-sticky" className="relative h-screen overflow-hidden" style={{ position: "sticky", top: 0 }}>
         {particleElements.map((particle, idx) => (
@@ -250,7 +250,7 @@ export default function JourneySection() {
         <div
           id="journey-road-wrap"
           ref={roadWrapRef}
-          className="journey-road-wrap pointer-events-none absolute left-1/2 top-[23vh] h-[70vh] w-[200px] -translate-x-1/2"
+          className="journey-road-wrap pointer-events-none absolute left-1/2 top-[21vh] h-[74vh] w-[200px] -translate-x-1/2"
         >
           <svg viewBox="0 0 200 700" preserveAspectRatio="none" width="100%" height="100%" className="block">
             <defs>

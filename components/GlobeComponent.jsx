@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { useRouter } from "next/navigation";
+import * as THREE from "three";
 
 const Globe = dynamic(() => import("react-globe.gl"), {
   ssr: false,
@@ -49,14 +49,39 @@ const ARCS = [
     endLat: 60.472,
     endLng: 8.4689,
   },
+  {
+    startLat: 20.5937,
+    startLng: 78.9629,
+    endLat: 51.5074,
+    endLng: -0.1278,
+  },
+  {
+    startLat: 20.5937,
+    startLng: 78.9629,
+    endLat: 40.7128,
+    endLng: -74.006,
+  },
+  {
+    startLat: 20.5937,
+    startLng: 78.9629,
+    endLat: 35.6762,
+    endLng: 139.6503,
+  },
+  {
+    startLat: 20.5937,
+    startLng: 78.9629,
+    endLat: -33.8688,
+    endLng: 151.2093,
+  },
 ];
 
+const DEFAULT_POV = { lat: 20, lng: 5, altitude: 3.15 };
+
 export default function GlobeComponent() {
-  const router = useRouter();
   const globeRef = useRef(null);
   const lastHoveredLocationIdRef = useRef(null);
   const hoverMoveTimeoutRef = useRef(null);
-  const navigateTimeoutRef = useRef(null);
+  const lightsAddedRef = useRef(false);
   const [countries, setCountries] = useState([]);
   const [hoveredCountry, setHoveredCountry] = useState(null);
   const [hoveredLocation, setHoveredLocation] = useState(null);
@@ -104,32 +129,9 @@ export default function GlobeComponent() {
   }, []);
 
   useEffect(() => {
-    if (!globeRef.current) {
-      return;
-    }
-
-    const controls = globeRef.current.controls();
-    controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.35;
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.08;
-    controls.enablePan = false;
-    controls.minDistance = 160;
-    controls.maxDistance = 420;
-
-    globeRef.current.pointOfView(
-      { lat: 22, lng: 28, altitude: 2.25 },
-      0,
-    );
-  }, []);
-
-  useEffect(() => {
     return () => {
       if (hoverMoveTimeoutRef.current) {
         clearTimeout(hoverMoveTimeoutRef.current);
-      }
-      if (navigateTimeoutRef.current) {
-        clearTimeout(navigateTimeoutRef.current);
       }
     };
   }, []);
@@ -151,10 +153,7 @@ export default function GlobeComponent() {
     }
 
     if (globeRef.current) {
-      globeRef.current.pointOfView(
-        { lat: 22, lng: 28, altitude: 2.25 },
-        1400,
-      );
+      globeRef.current.pointOfView(DEFAULT_POV, 1400);
     }
   }, []);
 
@@ -194,24 +193,60 @@ export default function GlobeComponent() {
 
   const handlePointClick = useCallback(
     (point) => {
-      if (!point?.route) {
+      if (!point || !globeRef.current) {
         return;
       }
 
-      if (navigateTimeoutRef.current) {
-        clearTimeout(navigateTimeoutRef.current);
-      }
-
+      setHoveredLocation(point);
       setClickedLocationId(point.id);
-      navigateTimeoutRef.current = setTimeout(() => {
-        router.push(point.route);
-      }, 130);
+      globeRef.current.pointOfView(
+        {
+          lat: point.lat,
+          lng: point.lng,
+          altitude: 1.7,
+        },
+        850,
+      );
     },
-    [router],
+    [],
   );
 
   const handlePolygonHover = useCallback((polygon) => {
     setHoveredCountry(polygon || null);
+  }, []);
+
+  const handleGlobeReady = useCallback(() => {
+    if (!globeRef.current || lightsAddedRef.current) return;
+
+    const scene = globeRef.current.scene?.();
+    if (!scene) return;
+
+    if (!scene.getObjectByName("imx-globe-dir-light")) {
+      const directional = new THREE.DirectionalLight(0xffffff, 1.2);
+      directional.name = "imx-globe-dir-light";
+      directional.position.set(5, 3, 5);
+      scene.add(directional);
+    }
+
+    if (!scene.getObjectByName("imx-globe-ambient-light")) {
+      const ambient = new THREE.AmbientLight(0x404040, 0.6);
+      ambient.name = "imx-globe-ambient-light";
+      scene.add(ambient);
+    }
+
+    const controls = globeRef.current.controls();
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 0.25;
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.08;
+    controls.enablePan = false;
+    controls.enableZoom = false;
+    controls.minDistance = 160;
+    controls.maxDistance = 420;
+
+    globeRef.current.pointOfView(DEFAULT_POV, 0);
+
+    lightsAddedRef.current = true;
   }, []);
 
   const tooltipContent = useMemo(() => {
@@ -235,54 +270,53 @@ export default function GlobeComponent() {
 
   return (
     <div
-      className="globe-shell"
+      className={`globe-shell ${hoveredLocation ? "hotspot" : ""}`}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="space-gradient" />
       <div className="star-layer" />
 
       <Globe
         ref={globeRef}
         backgroundColor="rgba(0,0,0,0)"
-        globeImageUrl="https://unpkg.com/three-globe/example/img/earth-dark.jpg"
-        bumpImageUrl="https://unpkg.com/three-globe/example/img/earth-topology.png"
-        showAtmosphere
-        atmosphereColor="#3f5f95"
-        atmosphereAltitude={0.2}
+        globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
+        bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
+        showAtmosphere={false}
+        onGlobeReady={handleGlobeReady}
         pointsData={pointsData}
+        pointsMerge={false}
         pointLat="lat"
         pointLng="lng"
-        pointAltitude={0.025}
+        pointAltitude={0.045}
         pointRadius={(point) => {
           if (point.id === clickedLocationId) {
-            return 0.72;
+            return 1.05;
           }
-          return point.id === hoveredLocation?.id ? 0.58 : 0.42;
+          return point.id === hoveredLocation?.id ? 0.9 : 0.72;
         }}
         pointColor={(point) =>
           point.id === hoveredLocation?.id || point.id === clickedLocationId
-            ? "#e0efff"
-            : "#9bc8ff"
+            ? "#f7e7bf"
+            : "#d7b270"
         }
         onPointHover={handlePointHover}
         onPointClick={handlePointClick}
         arcsData={arcsData}
-        arcColor={() => ["#84bfff", "#6fa7ff"]}
-        arcStroke={0.9}
+        arcColor={() => ["#f1d197", "#c6964f"]}
+        arcStroke={0.8}
         arcAltitude={0.2}
-        arcDashLength={0.45}
-        arcDashGap={0.75}
+        arcDashLength={0.3}
+        arcDashGap={0.15}
         arcDashInitialGap={() => Math.random()}
-        arcDashAnimateTime={2000}
+        arcDashAnimateTime={1800}
         polygonsData={countries}
         polygonCapColor={(polygon) =>
           polygon === hoveredCountry
-            ? "rgba(144, 196, 255, 0.45)"
-            : "rgba(45, 71, 108, 0.2)"
+            ? "rgba(186, 149, 86, 0.38)"
+            : "rgba(62, 62, 62, 0.16)"
         }
-        polygonSideColor={() => "rgba(115, 150, 196, 0.08)"}
-        polygonStrokeColor={() => "rgba(160, 199, 252, 0.45)"}
+        polygonSideColor={() => "rgba(78, 78, 78, 0.12)"}
+        polygonStrokeColor={() => "rgba(192, 152, 84, 0.38)"}
         polygonAltitude={(polygon) => (polygon === hoveredCountry ? 0.018 : 0.006)}
         polygonCapCurvatureResolution={4}
         onPolygonHover={handlePolygonHover}
@@ -303,46 +337,33 @@ export default function GlobeComponent() {
 
       <style jsx>{`
         .globe-shell {
-          position: relative;
+          position: absolute;
+          top: 0;
+          left: 18%;
+          height: 100%;
           width: 100%;
-          height: min(82vh, 780px);
-          min-height: 520px;
-          overflow: hidden;
-          border-radius: 24px;
-          border: 1px solid rgba(255, 255, 255, 0.14);
-          background: linear-gradient(180deg, #050914 0%, #05070d 55%, #03050a 100%);
-          box-shadow:
-            inset 0 0 80px rgba(104, 152, 255, 0.08),
-            0 20px 60px rgba(0, 0, 0, 0.45);
+          background: #000;
           isolation: isolate;
+          cursor: grab;
         }
 
-        .space-gradient,
+        .globe-shell.hotspot {
+          cursor: pointer;
+        }
+
         .star-layer {
           position: absolute;
           inset: 0;
           pointer-events: none;
-        }
-
-        .space-gradient {
-          background:
-            radial-gradient(circle at 16% 22%, rgba(39, 68, 128, 0.36), transparent 38%),
-            radial-gradient(circle at 82% 14%, rgba(24, 49, 108, 0.24), transparent 40%),
-            radial-gradient(circle at 53% 86%, rgba(17, 32, 73, 0.3), transparent 48%);
-          z-index: 0;
+          z-index: 1;
+          background: #000;
         }
 
         .star-layer {
-          z-index: 1;
-          opacity: 0.45;
+          opacity: 0.3;
           background-image:
-            radial-gradient(1px 1px at 10% 20%, rgba(255, 255, 255, 0.9), transparent),
-            radial-gradient(1px 1px at 30% 70%, rgba(185, 214, 255, 0.9), transparent),
-            radial-gradient(1px 1px at 80% 35%, rgba(255, 255, 255, 0.8), transparent),
-            radial-gradient(1px 1px at 62% 58%, rgba(180, 200, 255, 0.9), transparent),
-            radial-gradient(1px 1px at 90% 82%, rgba(255, 255, 255, 0.9), transparent),
-            radial-gradient(1px 1px at 16% 88%, rgba(196, 214, 255, 0.9), transparent),
-            radial-gradient(1px 1px at 44% 28%, rgba(255, 255, 255, 0.85), transparent);
+            radial-gradient(1px 1px at 20% 30%, #fff, transparent),
+            radial-gradient(1px 1px at 70% 60%, #fff, transparent);
           background-size: 340px 340px;
           animation: drift 55s linear infinite;
         }
@@ -352,6 +373,9 @@ export default function GlobeComponent() {
           z-index: 2;
           width: 100% !important;
           height: 100% !important;
+          transform: translateX(1%) scale(1.05) !important;
+          pointer-events: auto !important;
+          touch-action: none;
         }
 
         .tooltip {
@@ -362,7 +386,7 @@ export default function GlobeComponent() {
           min-width: 160px;
           border-radius: 14px;
           border: 1px solid rgba(255, 255, 255, 0.22);
-          background: rgba(10, 18, 32, 0.5);
+          background: rgba(12, 11, 10, 0.62);
           backdrop-filter: blur(11px);
           -webkit-backdrop-filter: blur(11px);
           box-shadow:
@@ -374,14 +398,14 @@ export default function GlobeComponent() {
           margin: 0;
           font-size: 0.9rem;
           font-weight: 600;
-          color: #eaf3ff;
+          color: #f4efe3;
           letter-spacing: 0.02em;
         }
 
         .tooltip-detail {
           margin-top: 3px;
           font-size: 0.75rem;
-          color: rgba(219, 233, 255, 0.78);
+          color: rgba(240, 226, 202, 0.78);
         }
 
         .globe-loading {
@@ -400,6 +424,18 @@ export default function GlobeComponent() {
           }
           to {
             transform: translate3d(-90px, -40px, 0);
+          }
+        }
+
+        @media (max-width: 1024px) {
+          .globe-shell {
+            left: 8%;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .globe-shell {
+            left: 1%;
           }
         }
       `}</style>

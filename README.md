@@ -34,3 +34,15 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Project Notes (Session Handoff)
+
+- Contact page route is `/contact` (wired from navbar `Enquire`).
+- Contact implementation lives in:
+  - `app/contact/page.tsx`
+  - `components/contact/ContactPageClient.tsx`
+- Contact form is a dynamic 3-step flow keyed by inquiry type and submits with EmailJS.
+- Homepage visual tuning was applied for 100% zoom balance:
+  - smaller navbar/logo proportions
+  - improved services section spacing
+  - longer journey section with more readable cards

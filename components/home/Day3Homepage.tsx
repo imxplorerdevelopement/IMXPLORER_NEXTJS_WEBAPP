@@ -226,7 +226,7 @@ export default function Day3Homepage() {
         <div className="hero-overlay-main absolute inset-0 z-[1]" />
         <div className="hero-overlay-bottom absolute right-0 bottom-0 left-0 z-[1] h-[200px]" />
 
-        <div className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-1 flex-col px-8 md:px-16">
+        <div className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-1 flex-col px-5 md:px-10">
           <div className="flex-1" />
           <div className="grid grid-cols-1 items-end gap-2 md:grid-cols-2 md:gap-8">
             <div>
@@ -279,8 +279,8 @@ export default function Day3Homepage() {
       </section>
 
       <section id="wc-section" className="relative" style={{ height: "280vh", background: "#0a0a0a" }}>
-        <div className="wc-sticky flex h-screen items-center overflow-hidden px-8 md:px-16">
-          <div className="mx-auto w-full max-w-[1600px]">
+        <div className="wc-sticky flex h-screen items-center overflow-hidden px-5 md:px-10">
+          <div className="mx-auto w-full max-w-[1200px]">
             <p className="wc-big-text select-none font-serif font-light leading-none tracking-tight">
               <span className="wc-word">We</span> <span className="wc-word">Care</span><span className="wc-word wc-dot">.</span>
             </p>
@@ -290,16 +290,16 @@ export default function Day3Homepage() {
       </section>
 
       <section id="philosophy" className="relative bg-imxLight text-imxDark" style={{ height: "250vh" }}>
-        <div className="phi-sticky flex h-screen items-center overflow-hidden px-8 pt-20 md:px-16">
-          <div className="mx-auto grid w-full max-w-[1400px] grid-cols-1 items-start gap-6 md:gap-16 lg:grid-cols-12">
+        <div className="phi-sticky flex h-screen items-center overflow-hidden px-5 pt-16 md:px-10">
+          <div className="mx-auto grid w-full max-w-[1200px] grid-cols-1 items-start gap-6 md:gap-12 lg:grid-cols-12">
             <div className="lg:col-span-4">
               <span className="mb-4 block font-sans text-[10px] font-bold tracking-[0.3em] text-imxRed uppercase">
                 Our Differentiator
               </span>
-              <h2 className="font-serif text-4xl leading-tight">We are not a tech platform.</h2>
+              <h2 className="font-serif text-3xl leading-tight">We are not a tech platform.</h2>
             </div>
             <div className="lg:col-span-8 lg:col-start-5">
-              <h3 className="mb-8 select-none font-serif text-[2.2rem] leading-[1.1] tracking-tight font-light md:mb-12 md:text-7xl lg:text-[5.5rem]">
+              <h3 className="mb-8 select-none font-serif text-[1.9rem] leading-[1.1] tracking-tight font-light md:mb-10 md:text-6xl lg:text-[4.5rem]">
                 <span className="wc-word wc-dark">We</span> <span className="wc-word wc-dark">are</span>{" "}
                 <span className="wc-word wc-dark">a</span> <span className="wc-word wc-dark">people</span>{" "}
                 <span className="wc-word wc-dark">business.</span>{" "}
@@ -321,16 +321,16 @@ export default function Day3Homepage() {
       <section
         id="services-section"
         ref={servicesSectionRef}
-        className="relative flex min-h-[100dvh] flex-col bg-imxDark pt-32 pb-24 md:pb-32"
+        className="relative flex min-h-[calc(100vh-7rem)] flex-col bg-imxDark pt-24 pb-40 md:pb-44"
       >
-        <div className="mx-auto mb-10 w-full max-w-[1400px] px-8 md:mb-16 md:px-16">
+        <div className="mx-auto mb-10 w-full max-w-[1200px] px-5 md:mb-14 md:px-10">
           <div className="glass-badge">
             <span className="block h-px w-4 flex-shrink-0 bg-imxRed" />
             Our Services - The Five Pillars
           </div>
         </div>
 
-        <div className="mx-auto mb-12 w-full max-w-[1400px] overflow-x-auto px-8 md:px-16 hide-scrollbar" ref={servicesNavScrollRef}>
+        <div className="mx-auto mb-12 w-full max-w-[1200px] overflow-x-auto px-5 md:px-10 hide-scrollbar" ref={servicesNavScrollRef}>
           <div id="services-nav" className="flex w-max items-center gap-6 pb-4 md:gap-8">
             {serviceItems.map((item, idx) => (
               <button
@@ -351,7 +351,7 @@ export default function Day3Homepage() {
           </div>
         </div>
 
-        <div className="relative mx-auto flex-1 w-full max-w-[1400px] px-8 md:px-16">
+        <div className="relative mx-auto flex-1 w-full max-w-[1200px] min-h-[20rem] px-5 md:min-h-[26rem] md:px-10 lg:min-h-[30rem]">
           <div id="services-cards" className="absolute inset-0 mx-8 mb-0 md:mx-16">
             {serviceItems.map((item, idx) => (
               <article key={item.id} className={`services-card ${activeService === idx ? "active" : ""}`}>
@@ -376,14 +376,16 @@ export default function Day3Homepage() {
         <div className="pointer-events-none absolute right-0 bottom-0 left-0 h-24 bg-gradient-to-b from-transparent to-[#0a0a0a]" />
       </section>
 
-      <JourneySection />
+      <div className="mt-12 md:mt-16">
+        <JourneySection />
+      </div>
 
       <section className="relative flex min-h-[100vh] flex-col justify-center overflow-hidden bg-[#f0ece9] py-20 text-imxDark">
         <div className="pointer-events-none absolute top-0 right-0 left-0 h-20 bg-gradient-to-b from-[#0a0a0a] to-transparent" />
 
-        <div className="mx-auto w-full max-w-[1400px] flex-shrink-0 px-8 pb-14 md:px-16 md:pb-20">
+        <div className="mx-auto w-full max-w-[1200px] flex-shrink-0 px-5 pb-12 md:px-10 md:pb-16">
           <span className="mb-4 block font-sans text-[10px] font-bold tracking-[0.3em] text-imxRed uppercase">Trusted By</span>
-          <h3 className="font-serif text-3xl text-black/60 italic md:text-5xl">
+          <h3 className="font-serif text-3xl text-black/60 italic md:text-4xl">
             &quot;Trust is the only currency that matters.&quot;
           </h3>
         </div>
