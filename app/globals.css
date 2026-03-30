@@ -151,20 +151,20 @@ body.loading {
 }
 
 .nav-logo {
-  height: 1.75rem;
+  height: 2.9rem;
   width: auto;
   transition: height 0.55s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 #navbar.scrolled .nav-logo {
-  height: 1.15rem;
+  height: 1.95rem;
 }
 
 .nav-links {
   display: none;
   gap: 2.5rem;
   font-family: var(--font-manrope), sans-serif;
-  font-size: 0.69rem;
+  font-size: 0.92rem;
   font-weight: 600;
   letter-spacing: 0.25em;
   text-transform: uppercase;
@@ -181,18 +181,18 @@ body.loading {
 
 #navbar.scrolled .nav-links {
   gap: 2rem;
-  font-size: 0.58rem;
+  font-size: 0.78rem;
   font-weight: 500;
   letter-spacing: 0.16em;
 }
 
 .nav-cta {
-  padding: 0.45rem 1.15rem;
+  padding: 0.52rem 1.28rem;
   border: 1px solid transparent;
   border-radius: 999px;
   color: rgb(252 249 248 / 65%);
   font-family: var(--font-spartan), sans-serif;
-  font-size: 0.6rem;
+  font-size: 0.84rem;
   font-weight: 700;
   letter-spacing: 0.25em;
   text-transform: uppercase;
@@ -325,7 +325,7 @@ body.loading {
 }
 
 .hero-heading-main {
-  font-size: clamp(2.8rem, 8vw, 9.5rem);
+  font-size: clamp(3.2rem, 9vw, 10.4rem);
 }
 
 .hero-word {
@@ -573,6 +573,10 @@ body.loading {
   animation: jDotPulse 2.8s ease-in-out infinite;
 }
 
+.journey-dynamic .journey-dot {
+  transition: none !important;
+}
+
 .journey-card {
   position: absolute;
   z-index: 10;
@@ -613,6 +617,12 @@ body.loading {
 .journey-card.left-card.active,
 .journey-card.right-card.active {
   transform: translateX(0) translateY(-50%);
+}
+
+.journey-dynamic .journey-card {
+  pointer-events: none;
+  transition: none !important;
+  will-change: transform, opacity, box-shadow;
 }
 
 .j-step {
@@ -661,6 +671,11 @@ body.loading {
 
 #journey-finish.active {
   opacity: 1;
+}
+
+.journey-dynamic #journey-finish {
+  transition: none !important;
+  will-change: transform, opacity;
 }
 
 .journey-finish-dot {
@@ -728,6 +743,14 @@ body.loading {
 
   #navbar.scrolled {
     padding: 0.6rem 0.75rem;
+  }
+
+  .nav-logo {
+    height: 2.35rem;
+  }
+
+  #navbar.scrolled .nav-logo {
+    height: 1.75rem;
   }
 
   #wc-section {

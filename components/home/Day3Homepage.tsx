@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import JourneySection from "@/components/home/JourneySection";
 
 type ServiceItem = {
   id: string;
@@ -55,70 +56,6 @@ const serviceItems: ServiceItem[] = [
   },
 ];
 
-const journeySteps = [
-  {
-    step: "01",
-    title: "You Reach Out",
-    body: "A call, a message, a referral. That's all it takes.",
-    side: "left-card",
-    top: "30vh",
-  },
-  {
-    step: "02",
-    title: "We Listen",
-    body: "One-on-one. Your family, your preferences, your budget. No forms, no bots.",
-    side: "right-card",
-    top: "39.5vh",
-  },
-  {
-    step: "03",
-    title: "We Build It",
-    body: "Flights, hotels, visas, transport, insurance. Every detail. From scratch.",
-    side: "left-card",
-    top: "49vh",
-  },
-  {
-    step: "04",
-    title: "We Beat The Price",
-    body: "Same hotels, same flights, 90% of the time, cheaper than any OTA.",
-    side: "right-card",
-    top: "58.5vh",
-  },
-  {
-    step: "05",
-    title: "Everything Confirmed",
-    body: "Tickets issued, visas processed, transfers booked. You just pack.",
-    side: "left-card",
-    top: "68vh",
-  },
-  {
-    step: "06",
-    title: "We Travel With You",
-    body: "24/7 on-call support. Delays, changes, emergencies, we are there.",
-    side: "right-card",
-    top: "77.5vh",
-  },
-  {
-    step: "07",
-    title: "Safe Return",
-    body: "Our job ends when you are home. That is why 90% come back to us.",
-    side: "left-card",
-    top: "86vh",
-    isGold: true,
-  },
-] as const;
-type JourneyStep = {
-  step: string;
-  title: string;
-  body: string;
-  side: "left-card" | "right-card";
-  top: string;
-  isGold?: boolean;
-};
-const typedJourneySteps: JourneyStep[] = [...journeySteps];
-
-const journeyThresholds = [0.07, 0.21, 0.36, 0.5, 0.64, 0.79, 0.93];
-
 const brandItems = [
   "BMW Group",
   "Samsung",
@@ -139,26 +76,10 @@ export default function Day3Homepage() {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const servicesSectionRef = useRef<HTMLElement | null>(null);
   const servicesNavScrollRef = useRef<HTMLDivElement | null>(null);
-  const journeySectionRef = useRef<HTMLElement | null>(null);
-  const journeyRoadWrapRef = useRef<HTMLDivElement | null>(null);
-  const journeyPathRef = useRef<SVGPathElement | null>(null);
-  const journeyHeadlightRef = useRef<SVGCircleElement | null>(null);
-  const journeyPathLengthRef = useRef<number>(0);
   const serviceTimerRef = useRef<number | null>(null);
   const hasInteractedWithServicesRef = useRef(false);
 
   const [activeService, setActiveService] = useState(0);
-  const [journeyProgress, setJourneyProgress] = useState(0);
-
-  const activeJourneyIndex = useMemo(() => {
-    let index = -1;
-    for (let i = 0; i < journeyThresholds.length; i += 1) {
-      if (journeyProgress >= journeyThresholds[i]) {
-        index = i;
-      }
-    }
-    return index;
-  }, [journeyProgress]);
 
   useEffect(() => {
     const cleanupTimers: number[] = [];
@@ -208,31 +129,6 @@ export default function Day3Homepage() {
           .querySelector<HTMLElement>(".wc-support")
           ?.classList.toggle("lit", philosophyProgress > 0.88);
       }
-
-      const journeySection = journeySectionRef.current;
-      const path = journeyPathRef.current;
-      if (!journeySection || !path || !journeyPathLengthRef.current) return;
-
-      const sectionRect = journeySection.getBoundingClientRect();
-      const scrollable = journeySection.offsetHeight - window.innerHeight;
-      if (scrollable <= 0) return;
-
-      const progress = Math.max(0, Math.min(1, -sectionRect.top / scrollable));
-      setJourneyProgress(progress);
-
-      const totalLength = journeyPathLengthRef.current;
-      path.style.strokeDashoffset = String(totalLength * (1 - progress));
-
-      const headlight = journeyHeadlightRef.current;
-      if (headlight) {
-        try {
-          const point = path.getPointAtLength(totalLength * progress);
-          headlight.setAttribute("cx", String(point.x));
-          headlight.setAttribute("cy", String(point.y));
-        } catch {
-          // ignore path sampling issues
-        }
-      }
     };
 
     const onPreloaderDone = () => runHeroIntro();
@@ -241,21 +137,6 @@ export default function Day3Homepage() {
     window.addEventListener("resize", updateScrollDrivenStates);
 
     if (!document.getElementById("preloader")) runHeroIntro();
-
-    if (journeyRoadWrapRef.current && window.innerWidth < 768) {
-      journeyRoadWrapRef.current.style.width = "60px";
-    }
-
-    if (journeyPathRef.current) {
-      try {
-        const length = journeyPathRef.current.getTotalLength();
-        journeyPathLengthRef.current = length;
-        journeyPathRef.current.style.strokeDasharray = String(length);
-        journeyPathRef.current.style.strokeDashoffset = String(length);
-      } catch {
-        // no-op
-      }
-    }
 
     updateScrollDrivenStates();
 
@@ -380,7 +261,7 @@ export default function Day3Homepage() {
             >
               <Link
                 href="#contact"
-                className="group inline-flex items-center gap-4 border border-white/30 px-7 py-3 font-sans text-[10px] tracking-[0.3em] text-white uppercase transition-all duration-500 hover:bg-white hover:text-black md:px-8 md:py-4"
+                className="group inline-flex items-center gap-4 border border-white/30 px-7 py-3 font-sans text-[12px] tracking-[0.2em] text-white uppercase transition-all duration-500 hover:bg-white hover:text-black md:px-8 md:py-4 md:text-[14px]"
               >
                 <span>Plan Your Journey</span>
                 <span className="block h-[1px] w-5 bg-white/60 transition-colors group-hover:bg-black" />
@@ -493,121 +374,7 @@ export default function Day3Homepage() {
         <div className="pointer-events-none absolute right-0 bottom-0 left-0 h-24 bg-gradient-to-b from-transparent to-[#0a0a0a]" />
       </section>
 
-      <section
-        id="journey-section"
-        ref={journeySectionRef}
-        className="relative bg-[#0a0a0a]"
-        style={{ height: "320vh" }}
-      >
-        <div id="journey-sticky" className="relative h-screen overflow-hidden" style={{ position: "sticky", top: 0 }}>
-          <div aria-hidden className="journey-particle left-[14%] top-[19%] h-[3px] w-[3px] bg-[rgba(201,168,76,0.22)]" />
-          <div aria-hidden className="journey-particle right-[11%] top-[52%] h-[2px] w-[2px] bg-[rgba(201,168,76,0.18)]" />
-          <div aria-hidden className="journey-particle left-[21%] top-[74%] h-[4px] w-[4px] bg-[rgba(201,168,76,0.13)]" />
-          <div aria-hidden className="journey-particle right-[24%] top-[33%] h-[2px] w-[2px] bg-[rgba(201,168,76,0.17)]" />
-
-          <div className="pointer-events-none absolute top-[7vh] right-0 left-0 z-20 text-center">
-            <span className="mb-3 block font-sans text-[10px] font-bold tracking-[0.3em] text-imxRed uppercase">
-              The Journey
-            </span>
-            <h2 className="font-serif text-white italic leading-[1.2] text-[clamp(1.5rem,3vw,2.8rem)]">
-              From First Call to Safe Return.
-            </h2>
-          </div>
-
-          <div
-            id="journey-road-wrap"
-            ref={journeyRoadWrapRef}
-            className="journey-road-wrap pointer-events-none absolute left-1/2 top-[23vh] h-[70vh] w-[200px] -translate-x-1/2"
-          >
-            <svg viewBox="0 0 200 700" preserveAspectRatio="none" width="100%" height="100%" className="block">
-              <defs>
-                <linearGradient id="jGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#D6052B" />
-                  <stop offset="100%" stopColor="rgba(201,168,76,0.85)" />
-                </linearGradient>
-                <filter id="jGlow" x="-80%" y="-80%" width="260%" height="260%">
-                  <feGaussianBlur stdDeviation="7" in="SourceGraphic" />
-                </filter>
-              </defs>
-
-              <path
-                className="road-stroke"
-                d="M 100 10 C 100 38 100 58 100 70 C 100 97 50 138 50 165 C 50 192 150 233 150 260 C 150 287 50 328 50 355 C 50 382 150 423 150 450 C 150 477 50 518 50 545 C 50 572 100 603 100 630 L 100 700"
-                stroke="rgba(255,255,255,0.05)"
-                strokeWidth="22"
-                fill="none"
-                strokeLinecap="round"
-              />
-              <path
-                className="road-stroke"
-                d="M 100 10 C 100 38 100 58 100 70 C 100 97 50 138 50 165 C 50 192 150 233 150 260 C 150 287 50 328 50 355 C 50 382 150 423 150 450 C 150 477 50 518 50 545 C 50 572 100 603 100 630 L 100 700"
-                stroke="rgba(201,168,76,0.13)"
-                strokeWidth="1.5"
-                fill="none"
-                strokeDasharray="7 11"
-                strokeLinecap="round"
-              />
-
-              <circle ref={journeyHeadlightRef} id="j-headlight" cx="100" cy="10" r="18" fill="rgba(214,5,43,0.12)" filter="url(#jGlow)" />
-
-              <path
-                id="journey-progress-path"
-                ref={journeyPathRef}
-                className="road-stroke"
-                d="M 100 10 C 100 38 100 58 100 70 C 100 97 50 138 50 165 C 50 192 150 233 150 260 C 150 287 50 328 50 355 C 50 382 150 423 150 450 C 150 477 50 518 50 545 C 50 572 100 603 100 630 L 100 700"
-                stroke="url(#jGrad)"
-                strokeWidth="2.5"
-                fill="none"
-                strokeLinecap="round"
-              />
-
-              {typedJourneySteps.map((step, i) => {
-                const positions = [
-                  ["100", "70", "5"],
-                  ["50", "165", "5"],
-                  ["150", "260", "5"],
-                  ["50", "355", "5"],
-                  ["150", "450", "5"],
-                  ["50", "545", "5"],
-                  ["100", "630", "7"],
-                ] as const;
-                const [cx, cy, r] = positions[i];
-                return (
-                  <circle
-                    key={step.step}
-                    className={`journey-dot ${activeJourneyIndex >= i ? "active" : ""}`}
-                    cx={cx}
-                    cy={cy}
-                    r={r}
-                    fill={step.isGold ? "rgba(201,168,76,0.9)" : "#D6052B"}
-                  />
-                );
-              })}
-            </svg>
-          </div>
-
-          {typedJourneySteps.map((step, i) => (
-            <div
-              key={step.step}
-              className={`journey-card ${step.side} ${activeJourneyIndex >= i ? "active" : ""}`}
-              style={{ top: step.top }}
-            >
-              <span className="j-step" style={step.isGold ? { color: "rgba(201,168,76,0.9)" } : undefined}>
-                {step.step}
-              </span>
-              <h3>{step.title}</h3>
-              <p>{step.body}</p>
-            </div>
-          ))}
-
-          <div id="journey-finish" className={activeJourneyIndex >= 6 ? "active" : ""}>
-            <span className="journey-finish-dot" />
-            <span className="font-sans text-[10px] font-bold tracking-[0.25em] text-[rgba(201,168,76,0.7)] uppercase">
-              Home.
-            </span>
-          </div>
-        </div>
-      </section>
+      <JourneySection />
 
       <section className="relative flex min-h-[100vh] flex-col justify-center overflow-hidden bg-[#f0ece9] py-20 text-imxDark">
         <div className="pointer-events-none absolute top-0 right-0 left-0 h-20 bg-gradient-to-b from-[#0a0a0a] to-transparent" />
