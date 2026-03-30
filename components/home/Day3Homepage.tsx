@@ -3,6 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import BackToTopButton from "@/components/home/BackToTopButton";
+import HniSection from "@/components/home/HniSection";
 import JourneySection from "@/components/home/JourneySection";
 
 type ServiceItem = {
@@ -412,6 +414,9 @@ export default function Day3Homepage() {
           className="pointer-events-none absolute right-0 bottom-0 left-0 h-[220px] bg-gradient-to-b from-transparent to-[#0d0b08]"
         />
       </section>
+
+      <HniSection />
+      <BackToTopButton />
     </div>
   );
 }

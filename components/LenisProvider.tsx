@@ -12,6 +12,8 @@ export default function LenisProvider() {
       syncTouch: false,
     });
 
+    (window as unknown as { __IMX_LENIS?: Lenis }).__IMX_LENIS = lenis;
+
     let rafId = 0;
     const raf = (time: number) => {
       lenis.raf(time);
@@ -23,6 +25,7 @@ export default function LenisProvider() {
     return () => {
       window.cancelAnimationFrame(rafId);
       lenis.destroy();
+      delete (window as unknown as { __IMX_LENIS?: Lenis }).__IMX_LENIS;
     };
   }, []);
 
