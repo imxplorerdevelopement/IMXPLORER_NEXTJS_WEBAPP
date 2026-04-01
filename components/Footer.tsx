@@ -15,6 +15,7 @@ export default function Footer() {
               width={160}
               height={40}
               className="mb-10 h-10 w-auto opacity-90 transition-opacity duration-500 hover:opacity-100"
+              style={{ width: "auto" }}
             />
 
             <p className="mb-8 max-w-[340px] font-sans text-xs leading-loose tracking-[0.2em] text-white/40 uppercase md:text-sm">

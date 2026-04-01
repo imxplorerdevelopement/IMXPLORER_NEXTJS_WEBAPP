@@ -48,8 +48,8 @@ export default function Nav() {
             <Image
               src="/assets/images/logo_white.png"
               alt="IMxplorer - The Travel Co."
-              width={144}
-              height={28}
+              width={205}
+              height={64}
               className="nav-logo"
               priority
             />

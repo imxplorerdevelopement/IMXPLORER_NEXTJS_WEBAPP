@@ -44,10 +44,10 @@ export default function Preloader() {
       <div className={`preloader-logo${isLogoActive ? " active" : ""}`}>
         <Image
           src="/assets/images/logo_white.png"
-          alt="IMxplorer — The Travel Co."
+          alt="IMxplorer - The Travel Co."
           width={286}
           height={90}
-          className="h-[64px] w-auto md:h-[90px]"
+          className="h-[50px] w-auto md:h-[72px]"
           priority
         />
         <div className="preloader-progress">

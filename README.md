@@ -37,12 +37,30 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Project Notes (Session Handoff)
 
-- Contact page route is `/contact` (wired from navbar `Enquire`).
-- Contact implementation lives in:
+Last updated: 2026-04-01
+
+- Contact route: `/contact` (navbar `Enquire` points here).
+- Contact page files:
   - `app/contact/page.tsx`
   - `components/contact/ContactPageClient.tsx`
-- Contact form is a dynamic 3-step flow keyed by inquiry type and submits with EmailJS.
-- Homepage visual tuning was applied for 100% zoom balance:
-  - smaller navbar/logo proportions
-  - improved services section spacing
-  - longer journey section with more readable cards
+- Contact hero updates:
+  - left-side hero copy removed
+  - hero height increased to avoid globe clipping
+- Globe updates (`components/GlobeComponent.jsx`):
+  - centered and scaled up
+  - layered animated background effects added
+  - point click routes to destination pages
+  - polygon click routes for mapped countries
+- Destination routes now available:
+  - `/destinations/india`
+  - `/destinations/dubai`
+  - `/destinations/norway`
+  - `/destinations/uk`
+  - `/destinations/usa`
+  - `/destinations/japan`
+  - `/destinations/australia`
+- Shared destination UI:
+  - `components/destinations/DestinationHeroPage.tsx`
+  - rotating hero backgrounds + consistent card layout
+- Current known blocker:
+  - `npm run lint` fails on `next.config.ts` because `require()` import style violates `@typescript-eslint/no-require-imports`.

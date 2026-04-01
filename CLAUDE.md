@@ -24,3 +24,28 @@
 - Navbar text/logo sizing reduced for tighter visual balance at 100% browser zoom.
 - Services section received additional height/spacing so cards are not visually clipped.
 - Journey section length increased and cards enlarged for readability.
+
+## Session Handoff (2026-04-01)
+
+### Contact + Globe
+- Contact hero left-side text was removed.
+- Contact hero minimum height was increased so the larger globe is less likely to clip at the bottom.
+- Globe was centered and enlarged further.
+- Globe background visuals were upgraded with layered animated effects.
+- Point clicks route to destination pages using per-location routes.
+- Polygon click routing now includes India, UAE, Norway, UK, USA, Japan, and Australia.
+
+### Destination Pages
+- Added destination pages with rotating hero backgrounds for:
+  - India
+  - Dubai
+  - Norway
+  - United Kingdom
+  - United States
+  - Japan
+  - Australia
+- Added shared destination UI component:
+  - `components/destinations/DestinationHeroPage.tsx`
+
+### Current Risk / Blocker
+- Lint still fails due to `next.config.ts` using `require()` import style (`@typescript-eslint/no-require-imports`).

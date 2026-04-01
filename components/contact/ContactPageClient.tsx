@@ -279,40 +279,9 @@ export default function ContactPageClient() {
   return (
     <section className="relative overflow-hidden bg-black pb-14 pt-0">
       <div className="relative w-full">
-        <section className="relative flex min-h-[calc(100vh-9rem)] items-center overflow-hidden bg-black">
+        <section className="relative flex min-h-[calc(100vh-6rem)] items-center overflow-hidden bg-black sm:min-h-[calc(100vh-4rem)] lg:min-h-[calc(100vh-2rem)]">
           <div className="absolute inset-0 z-[1]">
             <GlobeComponent />
-          </div>
-          <div className="pointer-events-none absolute left-0 top-0 z-[2] h-full w-full bg-gradient-to-r from-black via-black/72 to-transparent sm:w-[60%] lg:w-[42%]" />
-
-          <div className="pointer-events-none relative z-[3] mx-auto w-full max-w-[1120px] px-4 sm:px-6 lg:px-8">
-            <article className="pointer-events-auto mt-4 max-w-[34rem] py-6 sm:mt-6 sm:py-8 lg:-ml-4 lg:mt-8 lg:py-8">
-              <p className="font-brand text-[0.62rem] tracking-[0.3em] text-imxGold uppercase">
-                Contact Imxplorer
-              </p>
-              <h1 className="mt-4 max-w-lg font-serif text-[clamp(1.6rem,3.1vw,2.7rem)] leading-[0.99] text-white">
-                Plan a trip worth talking about.
-              </h1>
-              <p className="mt-4 max-w-xl text-[0.82rem] leading-relaxed text-white/70">
-                Share your destination, style, and expectations. Our team handles the logistics,
-                timing, and detail so your journey feels effortless from day one.
-              </p>
-
-              <div className="mt-8 space-y-3">
-                <a
-                  href="tel:+919811099951"
-                  className="block font-serif text-[2.45rem] text-white/90 transition-colors hover:text-imxGold"
-                >
-                  +91 98110 99951
-                </a>
-                <a
-                  href="mailto:contact@imxplorer.com"
-                  className="block font-sans text-sm text-white/75 transition-colors hover:text-white"
-                >
-                  contact@imxplorer.com
-                </a>
-              </div>
-            </article>
           </div>
         </section>
 
