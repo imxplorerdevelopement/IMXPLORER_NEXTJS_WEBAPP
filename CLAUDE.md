@@ -27,6 +27,11 @@
 
 ## Session Handoff (2026-04-01)
 
+### Checkpoint
+- Latest local commit: `63fa069`
+- Working tree at checkpoint: clean
+- Push status from this workspace: not pushed
+
 ### Contact + Globe
 - Contact hero left-side text was removed.
 - Contact hero minimum height was increased so the larger globe is less likely to clip at the bottom.
@@ -49,3 +54,29 @@
 
 ### Current Risk / Blocker
 - Lint still fails due to `next.config.ts` using `require()` import style (`@typescript-eslint/no-require-imports`).
+
+## Session Handoff (2026-04-02)
+
+### Blogs Page — Day/Night Theme Toggle
+
+- Blogs page refactored into server + client split:
+  - `app/blogs/page.tsx` — server component, holds `metadata` export + JSON-LD structured data
+  - `components/blogs/BlogsPageClient.tsx` — client component, owns `isDark` toggle state
+- Toggle button (sun/moon icon) lives in the masthead top-right, next to "Plan your trip"
+- Day mode: warm white background (`#fdf6f4`) with reddish-rose accent palette
+- Night mode: original dark design (`#0c0c0e`) preserved exactly
+- Theme propagated to `document.body` via `data-blog-theme="light"|"dark"` attribute (set in `useEffect`, cleaned up on unmount)
+- Nav adapts to day mode via CSS selectors in `globals.css` (`body[data-blog-theme="light"] #navbar ...`)
+  - Nav text, links, CTA button, hamburger lines, back-to-top all switch to dark tones in day mode
+- `NewsletterForm` accepts `isDark?: boolean` prop (default `true`) — input/button colors adapt accordingly
+
+### Blog Data — Shared Source of Truth
+
+- All blog post data extracted to `lib/data/blog-posts.ts` (`BlogPost` interface + `posts` array)
+- Both `page.tsx` (JSON-LD) and `BlogsPageClient.tsx` (UI) import from this single source
+- `isoDate` field added to each post (used for `datePublished` in JSON-LD — was previously using human-readable string)
+
+### Known Gaps (not blocking)
+- `app/blogs/[slug]/page.tsx` does not exist yet — "Read article" links will 404 until individual post pages are built
+- Newsletter form `onSubmit` is a no-op placeholder — needs EmailJS wiring or API route
+- Category filter pills are visual-only — no filter logic wired

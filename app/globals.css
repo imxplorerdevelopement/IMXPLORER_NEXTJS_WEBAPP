@@ -175,11 +175,21 @@ body.loading {
   color: rgb(252 249 248 / 75%);
 }
 
-.nav-links a {
+.nav-links a,
+.nav-links button {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
   transition: color 0.3s ease;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links button:hover {
   color: var(--red);
 }
 
@@ -262,6 +272,11 @@ body.loading {
 
 .menu-link {
   display: block;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
   font-family: var(--font-cormorant), serif;
   font-size: 2.8rem;
   font-weight: 300;
@@ -1131,4 +1146,59 @@ body.contact-cursor [data-cursor] {
   .contact-cursor-dot {
     display: none;
   }
+}
+
+/* ── Blog day-mode: nav + global overrides ───────────────────────────────── */
+body[data-blog-theme="light"] #navbar {
+  color: rgb(50 20 15 / 85%);
+}
+
+body[data-blog-theme="light"] #navbar.scrolled .nav-inner {
+  border-color: rgb(160 55 40 / 18%);
+  background: rgb(253 246 244 / 82%);
+  box-shadow:
+    0 8px 40px rgb(0 0 0 / 12%),
+    0 0 0 1px rgb(160 55 40 / 6%);
+}
+
+body[data-blog-theme="light"] .nav-links {
+  color: rgb(50 20 15 / 70%);
+}
+
+body[data-blog-theme="light"] .nav-links a:hover,
+body[data-blog-theme="light"] .nav-links button:hover {
+  color: rgb(160 55 40 / 90%);
+}
+
+body[data-blog-theme="light"] .nav-cta {
+  color: rgb(50 20 15 / 60%);
+}
+
+body[data-blog-theme="light"] #navbar.scrolled .nav-cta {
+  border-color: rgb(160 55 40 / 45%);
+  background: rgb(160 55 40 / 10%);
+  color: rgb(160 55 40 / 95%);
+}
+
+body[data-blog-theme="light"] .nav-cta:hover {
+  border-color: rgb(160 55 40 / 75%) !important;
+  background: rgb(160 55 40 / 20%) !important;
+  color: rgb(120 30 15) !important;
+}
+
+/* Hamburger lines */
+body[data-blog-theme="light"] #menu-btn span {
+  background: rgb(50 20 15 / 85%);
+}
+
+/* Back-to-top */
+body[data-blog-theme="light"] #back-to-top {
+  border-color: rgb(50 20 15 / 18%);
+  background: rgb(50 20 15 / 7%);
+  color: rgb(50 20 15 / 75%);
+}
+
+body[data-blog-theme="light"] #back-to-top:hover {
+  background: rgb(50 20 15 / 14%);
+  color: rgb(50 20 15);
 }
