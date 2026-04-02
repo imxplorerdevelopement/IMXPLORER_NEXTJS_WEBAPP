@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import TravelParticleBackground from "@/components/ambient/TravelParticleBackground";
+import ServiceCard from "@/components/services/ServiceCard";
 
 export const metadata: Metadata = {
   title: "Services | IMxplorer — The Travel Co.",
@@ -310,35 +311,12 @@ export default function ServicesPage() {
                   <div className="md:col-span-6">
                     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                       {pillar.services.map((svc) => (
-                        <div
+                        <ServiceCard
                           key={svc.name}
-                          className="rounded-xl border p-4 transition-all duration-300 hover:border-opacity-60"
-                          style={{
-                            borderColor: "rgba(255,255,255,0.07)",
-                            background: "rgba(255,255,255,0.025)",
-                          }}
-                          onMouseEnter={(e) => {
-                            (e.currentTarget as HTMLDivElement).style.borderColor = pillar.accentColor + "44";
-                            (e.currentTarget as HTMLDivElement).style.background = pillar.accentColor + "0a";
-                          }}
-                          onMouseLeave={(e) => {
-                            (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(255,255,255,0.07)";
-                            (e.currentTarget as HTMLDivElement).style.background = "rgba(255,255,255,0.025)";
-                          }}
-                        >
-                          <div className="mb-1.5 flex items-center gap-2">
-                            <span
-                              className="h-1 w-1 rounded-full shrink-0"
-                              style={{ background: pillar.accentColor }}
-                            />
-                            <p className="font-brand text-[0.55rem] tracking-[0.22em] text-white/80 uppercase">
-                              {svc.name}
-                            </p>
-                          </div>
-                          <p className="font-sans text-[0.78rem] leading-relaxed text-white/40" style={{ fontWeight: 300 }}>
-                            {svc.desc}
-                          </p>
-                        </div>
+                          name={svc.name}
+                          desc={svc.desc}
+                          accentColor={pillar.accentColor}
+                        />
                       ))}
                     </div>
                   </div>
