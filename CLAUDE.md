@@ -80,3 +80,20 @@
 - `app/blogs/[slug]/page.tsx` does not exist yet — "Read article" links will 404 until individual post pages are built
 - Newsletter form `onSubmit` is a no-op placeholder — needs EmailJS wiring or API route
 - Category filter pills are visual-only — no filter logic wired
+
+## Session Handoff (2026-04-02 — Services Page)
+
+### Services Page Rebuild
+
+- `app/services/page.tsx` fully rewritten — same ambient particle background, elevated layout
+- Structure: hero with stats row → five-pillar accordion-style list → bespoke CTA strip
+- Each pillar has: code, icon, tagline, body, and a grid of sub-service cards
+- **New services added** (all under Holidays & Leisure pillar):
+  - International Holidays
+  - Domestic Holidays
+  - Multi-Country Itineraries
+  - Honeymoon & Romantic Getaways
+  - Senior Citizen Friendly Travel
+  - Golf Tourism
+- Sub-service cards have hover accent colors derived from their parent pillar
+- Page remains a pure server component (no client state needed)

@@ -27,3 +27,10 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - ESLint failure: `next.config.ts` uses `require()` (`@typescript-eslint/no-require-imports`)
 - `app/blogs/[slug]/page.tsx` not yet created — post detail links 404
 - Newsletter form submit is a no-op placeholder
+
+### Services page
+- `app/services/page.tsx` rebuilt with hero + stats row + pillar list + CTA strip
+- Five pillars: Holidays & Leisure, Study Abroad, Corporate & MICE, Travel & Logistics, Visas & Services
+- Holidays & Leisure expanded with 6 sub-services: International Holidays, Domestic Holidays, Multi-Country Itineraries, Honeymoon & Romantic Getaways, Senior Citizen Friendly Travel, Golf Tourism
+- Sub-service cards: hover border/bg tinted to pillar accent color via inline onMouseEnter/Leave handlers
+- Pure server component — no client split needed
