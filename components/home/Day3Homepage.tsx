@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import BackToTopButton from "@/components/home/BackToTopButton";
-import HniSection from "@/components/home/HniSection";
 import JourneySection from "@/components/home/JourneySection";
 
 type ServiceItem = {
@@ -262,7 +261,7 @@ export default function Day3Homepage() {
               style={{ transitionDelay: "0.15s" }}
             >
               <Link
-                href="#contact"
+                href="/contact"
                 className="group inline-flex items-center gap-4 border border-white/30 px-7 py-3 font-sans text-[12px] tracking-[0.2em] text-white uppercase transition-all duration-500 hover:bg-white hover:text-black md:px-8 md:py-4 md:text-[14px]"
               >
                 <span>Plan Your Journey</span>
@@ -417,7 +416,6 @@ export default function Day3Homepage() {
         />
       </section>
 
-      <HniSection />
       <BackToTopButton />
     </div>
   );

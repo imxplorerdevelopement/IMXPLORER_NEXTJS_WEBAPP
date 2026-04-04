@@ -7,11 +7,31 @@ type DestinationCard = {
   body: string;
 };
 
+type DestinationFact = {
+  label: string;
+  value: string;
+};
+
+type DestinationItineraryStop = {
+  day: string;
+  plan: string;
+};
+
+type DestinationFaq = {
+  question: string;
+  answer: string;
+};
+
 type DestinationHeroPageProps = {
   name: string;
   description: string;
   backgrounds: string[];
   cards: DestinationCard[];
+  seoIntro: string;
+  highlights: string[];
+  facts: DestinationFact[];
+  itinerary: DestinationItineraryStop[];
+  faqs: DestinationFaq[];
 };
 
 export default function DestinationHeroPage({
@@ -19,6 +39,11 @@ export default function DestinationHeroPage({
   description,
   backgrounds,
   cards,
+  seoIntro,
+  highlights,
+  facts,
+  itinerary,
+  faqs,
 }: DestinationHeroPageProps) {
   const [activeBg, setActiveBg] = useState(0);
 
@@ -69,6 +94,62 @@ export default function DestinationHeroPage({
             </article>
           ))}
         </div>
+
+        <div className="mt-10 rounded-2xl border border-white/10 bg-black/30 p-6 backdrop-blur-sm">
+          <h2 className="font-serif text-3xl text-white/95">Why Visit {name}</h2>
+          <p className="mt-3 max-w-4xl text-sm leading-relaxed text-white/75">{seoIntro}</p>
+        </div>
+
+        <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+          <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <h2 className="font-serif text-2xl text-white/92">Top Highlights</h2>
+            <ul className="mt-3 space-y-2">
+              {highlights.map((item) => (
+                <li key={item} className="text-sm leading-relaxed text-white/70">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <h2 className="font-serif text-2xl text-white/92">Travel Snapshot</h2>
+            <dl className="mt-3 space-y-3">
+              {facts.map((item) => (
+                <div key={item.label}>
+                  <dt className="text-[0.68rem] tracking-[0.2em] text-white/45 uppercase">
+                    {item.label}
+                  </dt>
+                  <dd className="mt-1 text-sm leading-relaxed text-white/78">{item.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </article>
+        </div>
+
+        <article className="mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+          <h2 className="font-serif text-2xl text-white/92">Sample Itinerary</h2>
+          <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {itinerary.map((item) => (
+              <section key={item.day} className="rounded-xl border border-white/10 bg-black/25 p-4">
+                <p className="text-[0.68rem] tracking-[0.18em] text-imxGold uppercase">{item.day}</p>
+                <p className="mt-2 text-sm leading-relaxed text-white/75">{item.plan}</p>
+              </section>
+            ))}
+          </div>
+        </article>
+
+        <article className="mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+          <h2 className="font-serif text-2xl text-white/92">Frequently Asked Questions</h2>
+          <div className="mt-4 space-y-4">
+            {faqs.map((item) => (
+              <section key={item.question}>
+                <h3 className="font-serif text-xl text-white/88">{item.question}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-white/70">{item.answer}</p>
+              </section>
+            ))}
+          </div>
+        </article>
       </div>
     </section>
   );

@@ -11,7 +11,8 @@ export default function BackToTopButton() {
 
   useEffect(() => {
     const onScroll = () => {
-      setVisible(window.scrollY > window.innerHeight * 0.6);
+      const next = window.scrollY > window.innerHeight * 0.6;
+      setVisible((prev) => (prev === next ? prev : next));
     };
 
     onScroll();

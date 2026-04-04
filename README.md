@@ -38,6 +38,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## Project Notes (Session Handoff)
 
 Last updated: 2026-04-01
+Checkpoint commit: `63fa069`
+Working tree status at checkpoint: clean
+Remote push status: not pushed from this workspace
 
 - Contact route: `/contact` (navbar `Enquire` points here).
 - Contact page files:

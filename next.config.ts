@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 
-const path = require("node:path");
+import path from "node:path";
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["192.168.1.36"],

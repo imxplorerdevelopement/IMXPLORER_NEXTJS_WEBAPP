@@ -3,26 +3,53 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+
+type LenisLike = {
+  scrollTo: (
+    target: HTMLElement | string | number,
+    options?: { duration?: number; offset?: number; immediate?: boolean },
+  ) => void;
+};
 
 export default function Nav() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const homeAnchors = useMemo(
-    () => ({
-      journeys: pathname === "/" ? "#services-section" : "/#services-section",
-      philosophy: pathname === "/" ? "#philosophy" : "/#philosophy",
-      luxe: pathname === "/" ? "#hni-section" : "/#hni-section",
-      contact: "/contact",
-    }),
-    [pathname],
-  );
+  const isLegalPage = pathname?.includes("/privacy-policy") ||
+    pathname?.includes("/terms-of-service") ||
+    pathname?.includes("/cookie-policy") ||
+    pathname?.includes("/cancellation-refund-policy");
+
+  const homeAnchors = {
+    philosophy: pathname === "/" ? "#philosophy" : "/#philosophy",
+    journey: pathname === "/" ? "#journey-section" : "/#journey-section",
+  };
+
+  const scrollToHomeSection = (sectionId: "philosophy" | "journey-section") => {
+    if (pathname !== "/") return;
+
+    const target = document.getElementById(sectionId);
+    if (!target) return;
+
+    const lenis = (window as unknown as { __IMX_LENIS?: LenisLike }).__IMX_LENIS;
+    if (lenis) {
+      lenis.scrollTo(target, { duration: 0.9, offset: 0 });
+    } else {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    const nextHash = `#${sectionId}`;
+    if (window.location.hash !== nextHash) {
+      window.history.replaceState(null, "", nextHash);
+    }
+  };
 
   useEffect(() => {
     const onScroll = () => {
-      setIsScrolled(window.scrollY > 80);
+      const next = window.scrollY > 80;
+      setIsScrolled((prev) => (prev === next ? prev : next));
     };
 
     onScroll();
@@ -42,11 +69,12 @@ export default function Nav() {
       <nav
         id="navbar"
         className={`fixed top-0 z-40 w-full text-white ${isScrolled ? "scrolled" : ""}`}
+        style={{ display: isLegalPage ? "none" : undefined }}
       >
         <div className="nav-inner">
           <Link href="/" className="flex cursor-pointer items-center">
             <Image
-              src="/assets/images/logo_white.png"
+              src={isLegalPage ? "/assets/images/logo_black.jpg" : "/assets/images/logo_white.png"}
               alt="IMxplorer - The Travel Co."
               width={205}
               height={64}
@@ -56,13 +84,28 @@ export default function Nav() {
           </Link>
 
           <div className="nav-links">
-            <Link href={homeAnchors.journeys}>Journeys</Link>
-            <Link href={homeAnchors.philosophy}>Philosophy</Link>
-            <Link href={homeAnchors.luxe}>LUXE</Link>
+            {pathname === "/" ? (
+              <button type="button" onClick={() => scrollToHomeSection("philosophy")}>
+                Philosophy
+              </button>
+            ) : (
+              <Link href={homeAnchors.philosophy}>Philosophy</Link>
+            )}
+            {pathname === "/" ? (
+              <button type="button" onClick={() => scrollToHomeSection("journey-section")}>
+                Journey
+              </button>
+            ) : (
+              <Link href={homeAnchors.journey}>Journey</Link>
+            )}
+            <Link href="/about">About</Link>
+            <Link href="/services">Services</Link>
+            <Link href="/blogs">Blogs</Link>
+            <Link href="/luxe">LUXE</Link>
           </div>
 
           <div className="flex items-center gap-3">
-            <Link href={homeAnchors.contact} className="nav-cta hidden md:inline-block">
+            <Link href="/contact" className="nav-cta hidden md:inline-block">
               Enquire
             </Link>
             <button
@@ -106,22 +149,76 @@ export default function Nav() {
           </button>
 
           <nav className="mb-16 flex flex-col gap-9">
+            {pathname === "/" ? (
+              <button
+                type="button"
+                className="menu-link"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  scrollToHomeSection("philosophy");
+                }}
+              >
+                Philosophy
+              </button>
+            ) : (
+              <Link
+                href={homeAnchors.philosophy}
+                className="menu-link"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Philosophy
+              </Link>
+            )}
+            {pathname === "/" ? (
+              <button
+                type="button"
+                className="menu-link"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  scrollToHomeSection("journey-section");
+                }}
+              >
+                Journey
+              </button>
+            ) : (
+              <Link
+                href={homeAnchors.journey}
+                className="menu-link"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Journey
+              </Link>
+            )}
             <Link
-              href={homeAnchors.journeys}
+              href="/about"
               className="menu-link"
               onClick={() => setIsMenuOpen(false)}
             >
-              Journeys
+              About
             </Link>
             <Link
-              href={homeAnchors.philosophy}
+              href="/services"
               className="menu-link"
               onClick={() => setIsMenuOpen(false)}
             >
-              Philosophy
+              Services
             </Link>
             <Link
-              href={homeAnchors.contact}
+              href="/blogs"
+              className="menu-link"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Blogs
+            </Link>
+            <Link
+              href="/luxe"
+              className="menu-link"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              LUXE
+            </Link>
+            <Link
+              href="/contact"
               className="menu-link"
               onClick={() => setIsMenuOpen(false)}
             >

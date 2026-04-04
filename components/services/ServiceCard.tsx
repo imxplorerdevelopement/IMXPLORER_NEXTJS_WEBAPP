@@ -4,17 +4,18 @@ interface ServiceCardProps {
   name: string;
   desc: string;
   accentColor: string;
+  accentRgb: string;
 }
 
-export default function ServiceCard({ name, desc, accentColor }: ServiceCardProps) {
+export default function ServiceCard({ name, desc, accentColor, accentRgb }: ServiceCardProps) {
   return (
     <div
       className="rounded-xl border p-4 transition-all duration-300"
       style={{ borderColor: "rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.025)" }}
       onMouseEnter={(e) => {
         const el = e.currentTarget as HTMLDivElement;
-        el.style.borderColor = accentColor + "44";
-        el.style.background = accentColor + "0a";
+        el.style.borderColor = `rgba(${accentRgb},0.35)`;
+        el.style.background = `rgba(${accentRgb},0.08)`;
       }}
       onMouseLeave={(e) => {
         const el = e.currentTarget as HTMLDivElement;

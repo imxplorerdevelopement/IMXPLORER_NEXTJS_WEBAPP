@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import TravelParticleBackground from "@/components/ambient/TravelParticleBackground";
 import ServiceCard from "@/components/services/ServiceCard";
 
 export const metadata: Metadata = {
@@ -28,154 +28,78 @@ const pillars = [
     code: "01",
     title: "Holidays & Leisure",
     tagline: "Every kind of getaway, crafted to the last detail.",
-    body:
-      "From sprawling international itineraries to weekend escapes within India — we build each holiday around your pace, comfort, and intent, not a brochure.",
+    body: "From sprawling international itineraries to weekend escapes within India — we build each holiday around your pace, comfort, and intent, not a brochure.",
     accentColor: "#c8922a",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-        <polyline points="9 22 9 12 15 12 15 22" />
-      </svg>
-    ),
+    accentRgb: "200,146,42",
+    image: "https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1600&q=85",
+    imageAlt: "Tropical beach resort with crystal clear water and lush palms",
     services: [
-      {
-        name: "International Holidays",
-        desc: "Fully managed overseas travel — flights, hotels, transfers, guided experiences, and 24/7 on-trip support across every continent.",
-      },
-      {
-        name: "Domestic Holidays",
-        desc: "Curated India itineraries from Himalayan treks to Kerala backwaters, with local expertise and seamless ground logistics.",
-      },
-      {
-        name: "Multi-Country Itineraries",
-        desc: "Seamlessly connected multi-destination trips — visa sequencing, transit logistics, and consistent comfort across every border.",
-      },
-      {
-        name: "Honeymoon & Romantic Getaways",
-        desc: "Private villas, candlelit dining, surprise experiences, and absolute discretion — designed for couples who want more than a hotel booking.",
-      },
-      {
-        name: "Senior Citizen Friendly Travel",
-        desc: "Pace-adjusted itineraries with accessibility-first accommodation, medical-grade travel insurance, and dedicated escorts when needed.",
-      },
-      {
-        name: "Golf Tourism",
-        desc: "Tee-times at world-ranked courses, club access, accommodation at resort properties, and itineraries built around your handicap and destinations.",
-      },
+      { name: "International Holidays", desc: "Fully managed overseas travel — flights, hotels, transfers, guided experiences, and 24/7 on-trip support across every continent." },
+      { name: "Domestic Holidays", desc: "Curated India itineraries from Himalayan treks to Kerala backwaters, with local expertise and seamless ground logistics." },
+      { name: "Multi-Country Itineraries", desc: "Seamlessly connected multi-destination trips — visa sequencing, transit logistics, and consistent comfort across every border." },
+      { name: "Honeymoon & Romantic Getaways", desc: "Private villas, candlelit dining, surprise experiences, and absolute discretion — designed for couples who want more than a hotel booking." },
+      { name: "Senior Citizen Friendly Travel", desc: "Pace-adjusted itineraries with accessibility-first accommodation, medical-grade travel insurance, and dedicated escorts when needed." },
+      { name: "Golf Tourism", desc: "Tee-times at world-ranked courses, club access, resort accommodation, and itineraries built around your handicap and chosen destinations." },
     ],
   },
   {
     code: "02",
     title: "Study Abroad",
     tagline: "Mobility support from shortlist to departure.",
-    body:
-      "Advisory and documentation support for students targeting international universities — covering visa preparation, pre-departure orientation, and in-country logistics.",
-    accentColor: "#3a6ea5",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-        <path d="M6 12v5c3 3 9 3 12 0v-5" />
-      </svg>
-    ),
+    body: "Advisory and documentation support for students targeting international universities — covering visa preparation, pre-departure orientation, and in-country logistics.",
+    accentColor: "#4a82c0",
+    accentRgb: "74,130,192",
+    image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1600&q=85",
+    imageAlt: "University campus with grand architecture and students walking",
     services: [
-      {
-        name: "University Pathway Planning",
-        desc: "Destination and institution matching based on academic profile, budget, and long-term career goals.",
-      },
-      {
-        name: "Student Visa Assistance",
-        desc: "Document checklists, application support, and interview preparation for study visas across the UK, USA, Canada, Australia, and Europe.",
-      },
-      {
-        name: "Pre-Departure Logistics",
-        desc: "Flights, accommodation, forex, insurance, and orientation kits — everything handled before day one in a new country.",
-      },
+      { name: "University Pathway Planning", desc: "Destination and institution matching based on academic profile, budget, and long-term career goals." },
+      { name: "Student Visa Assistance", desc: "Document checklists, application support, and interview preparation for study visas across the UK, USA, Canada, Australia, and Europe." },
+      { name: "Pre-Departure Logistics", desc: "Flights, accommodation, forex, insurance, and orientation kits — everything handled before day one in a new country." },
     ],
   },
   {
     code: "03",
     title: "Corporate & MICE",
     tagline: "Group movements built for outcomes, not headcount.",
-    body:
-      "Conferences, incentive trips, offsites, and large-format group movements handled with the operational discipline that corporate travel demands.",
-    accentColor: "#8f2f2f",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-      </svg>
-    ),
+    body: "Conferences, incentive trips, offsites, and large-format group movements handled with the operational discipline that corporate travel demands.",
+    accentColor: "#c0414a",
+    accentRgb: "192,65,74",
+    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1600&q=85",
+    imageAlt: "Large corporate conference event with stage lighting and audience",
     services: [
-      {
-        name: "Incentive Travel",
-        desc: "High-value reward trips for sales teams and top performers — exclusive destinations, premium stays, and memorable group experiences.",
-      },
-      {
-        name: "Conferences & Offsites",
-        desc: "End-to-end management of venue sourcing, delegate travel, accommodation, F&B, and AV — across domestic and international locations.",
-      },
-      {
-        name: "Group Movements",
-        desc: "Coordinated air and ground logistics for large delegations, with real-time support and contingency planning built in.",
-      },
+      { name: "Incentive Travel", desc: "High-value reward trips for sales teams and top performers — exclusive destinations, premium stays, and memorable group experiences." },
+      { name: "Conferences & Offsites", desc: "End-to-end management of venue sourcing, delegate travel, accommodation, F&B, and AV — across domestic and international locations." },
+      { name: "Group Movements", desc: "Coordinated air and ground logistics for large delegations, with real-time support and contingency planning built in." },
     ],
   },
   {
     code: "04",
     title: "Travel & Logistics",
     tagline: "Every operational layer of travel, executed right.",
-    body:
-      "Flights, travel insurance, cruises, and ground coordination — the infrastructure behind every trip, handled with precision and genuine care.",
-    accentColor: "#2d7a5e",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17.8 19.2L16 11l3.5-3.5C21 6 21 4 19.5 2.5S18 2 16.5 3.5L13 7 4.8 5.2C4.3 5.1 3.9 5.4 3.8 5.8l-.4 1.5c-.1.4.1.8.5 1l8.3 3.2-2.4 4.3-2.1-.8c-.4-.1-.8 0-1 .3l-.8 1.3c-.2.4-.1.8.2 1l5.9 3.9c.3.2.7.1 1-.1l.6-.7c.2-.3.2-.7 0-.9l-1-1.7 4.5-2.4 3.2 8.3c.2.4.6.6 1 .5l1.5-.4c.4-.1.7-.5.6-1z" />
-      </svg>
-    ),
+    body: "Flights, travel insurance, cruises, and ground coordination — the infrastructure behind every trip, handled with precision and genuine care.",
+    accentColor: "#3a9e78",
+    accentRgb: "58,158,120",
+    image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1600&q=85",
+    imageAlt: "Aerial view of airplane wing flying above clouds at sunset",
     services: [
-      {
-        name: "Flight Bookings",
-        desc: "Economy to business class across all carriers — with fare monitoring, flexible ticketing, and managed changes when plans shift.",
-      },
-      {
-        name: "Travel Insurance",
-        desc: "Comprehensive coverage for medical emergencies, trip cancellations, baggage, and adventure activities.",
-      },
-      {
-        name: "Cruises",
-        desc: "Ocean and river cruise bookings across all major lines — stateroom selection, shore excursions, and onboard experience planning.",
-      },
+      { name: "Flight Bookings", desc: "Economy to business class across all carriers — with fare monitoring, flexible ticketing, and managed changes when plans shift." },
+      { name: "Travel Insurance", desc: "Comprehensive coverage for medical emergencies, trip cancellations, baggage, and adventure activities." },
+      { name: "Cruises", desc: "Ocean and river cruise bookings across all major lines — stateroom selection, shore excursions, and onboard experience planning." },
     ],
   },
   {
     code: "05",
     title: "Visas & Services",
     tagline: "Less paperwork. Less risk. More time to focus on the trip.",
-    body:
-      "Tourist and business visa assistance, documentation review, and service workflows that cut delay risk for clients with time-sensitive travel.",
-    accentColor: "#6b4ea0",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-        <polyline points="14 2 14 8 20 8" />
-        <line x1="16" y1="13" x2="8" y2="13" />
-        <line x1="16" y1="17" x2="8" y2="17" />
-        <polyline points="10 9 9 9 8 9" />
-      </svg>
-    ),
+    body: "Tourist and business visa assistance, documentation review, and service workflows that cut delay risk for clients with time-sensitive travel.",
+    accentColor: "#8b6fc0",
+    accentRgb: "139,111,192",
+    image: "https://images.unsplash.com/photo-1569949381669-ecf31ae8e613?auto=format&fit=crop&w=1600&q=85",
+    imageAlt: "Open passport with visa stamps from countries around the world",
     services: [
-      {
-        name: "Tourist Visa Assistance",
-        desc: "Application support, document checklists, and appointment coordination for short-stay visas across all major destinations.",
-      },
-      {
-        name: "Business Visa Support",
-        desc: "Fast-track documentation support for business travellers with tight timelines and complex multi-entry requirements.",
-      },
-      {
-        name: "Forex & Travel Essentials",
-        desc: "Currency exchange at competitive rates, travel SIMs, and pre-trip checklists so nothing gets missed before departure.",
-      },
+      { name: "Tourist Visa Assistance", desc: "Application support, document checklists, and appointment coordination for short-stay visas across all major destinations." },
+      { name: "Business Visa Support", desc: "Fast-track documentation support for business travellers with tight timelines and complex multi-entry requirements." },
+      { name: "Forex & Travel Essentials", desc: "Currency exchange at competitive rates, travel SIMs, and pre-trip checklists so nothing gets missed before departure." },
     ],
   },
 ];
@@ -191,198 +115,342 @@ const stats = [
 
 export default function ServicesPage() {
   return (
-    <main className="relative overflow-hidden bg-[#0c0c0e] text-imxLight">
-      <TravelParticleBackground className="opacity-35" particleCount={55} maxLinkDistance={145} />
+    <main className="relative bg-[#080809] text-imxLight overflow-x-hidden">
 
-      {/* Ambient gradients */}
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 z-[1]"
-        style={{
-          background:
-            "radial-gradient(ellipse 55% 40% at 85% 10%, rgba(184,148,63,0.10), transparent 55%), radial-gradient(ellipse 50% 35% at 10% 80%, rgba(143,47,47,0.12), transparent 55%)",
-        }}
-      />
+      {/* ══ HERO — full-bleed image masthead ══════════════════════════════════ */}
+      <section className="relative h-[92vh] min-h-[600px] max-h-[900px] overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&w=2000&q=90"
+          alt="World map with travel destinations highlighted at night"
+          fill
+          sizes="100vw"
+          className="object-cover object-center"
+          priority
+        />
+        {/* Deep cinematic overlay */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(160deg, rgba(8,8,9,0.72) 0%, rgba(8,8,9,0.38) 45%, rgba(8,8,9,0.85) 100%)",
+          }}
+        />
+        {/* Bottom fade into page bg */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-48"
+          style={{ background: "linear-gradient(to bottom, transparent, #080809)" }}
+        />
+        {/* Gold vignette top-right */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 50% 45% at 80% 15%, rgba(184,148,63,0.18), transparent 60%)",
+          }}
+        />
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 md:px-10">
+        {/* Hero content */}
+        <div className="relative z-10 flex h-full flex-col justify-end pb-20 md:pb-28">
+          <div className="mx-auto w-full max-w-6xl px-6 md:px-10">
+            <p className="font-brand text-[0.58rem] tracking-[0.44em] text-imxGold uppercase mb-5">
+              What We Do
+            </p>
+            <h1
+              className="font-serif font-light text-white"
+              style={{
+                fontSize: "clamp(3.2rem, 7.5vw, 6.4rem)",
+                lineHeight: 1.02,
+                letterSpacing: "-0.018em",
+                maxWidth: "16ch",
+              }}
+            >
+              Every kind of journey.
+              <br />
+              <span className="italic" style={{ color: "rgba(246,242,233,0.42)" }}>
+                One team behind it.
+              </span>
+            </h1>
 
-        {/* ══ HERO ══════════════════════════════════════════════════════════════ */}
-        <section className="pt-44 pb-20 md:pt-56 md:pb-28">
-          <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-            <div className="max-w-2xl">
-              <p className="font-brand text-[0.58rem] tracking-[0.42em] text-imxGold uppercase mb-5">
-                What We Do
-              </p>
-              <h1
-                className="font-serif font-light text-white"
-                style={{ fontSize: "clamp(3rem, 7vw, 5.6rem)", lineHeight: 1.03, letterSpacing: "-0.015em" }}
+            <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-center">
+              <p
+                className="font-sans text-sm leading-relaxed text-white/50 md:text-base"
+                style={{ fontWeight: 300, maxWidth: "44ch" }}
               >
-                Every kind of journey.
-                <br />
-                <span className="italic" style={{ color: "rgba(246,242,233,0.45)" }}>
-                  One team behind it.
-                </span>
-              </h1>
-              <p className="mt-7 font-sans text-sm leading-relaxed text-white/55 md:text-base" style={{ fontWeight: 300, maxWidth: "52ch" }}>
-                IMxplorer does not sell fixed packages. We design and execute each travel
-                program around your objectives, timeline, and comfort standard — across five
-                integrated service pillars.
+                We don't sell packages. We design and execute each travel program around your
+                objectives, timeline, and comfort standard.
               </p>
-            </div>
-
-            <div className="flex shrink-0 flex-col gap-3">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-3 rounded-full border px-6 py-3 font-sans text-[0.65rem] tracking-[0.22em] text-imxGold uppercase transition-all duration-300 hover:bg-imxGold/10"
-                style={{ borderColor: "rgba(184,148,63,0.45)" }}
+                className="shrink-0 inline-flex items-center gap-3 rounded-full border px-6 py-3 font-sans text-[0.65rem] tracking-[0.22em] text-imxGold uppercase transition-all duration-300 hover:bg-imxGold/12"
+                style={{ borderColor: "rgba(184,148,63,0.5)" }}
               >
                 Start planning
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                   <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </Link>
-              <p className="font-sans text-[0.58rem] tracking-[0.14em] text-white/25 text-center">No commitment required</p>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Stats row */}
-          <div className="mt-16 grid grid-cols-2 gap-px md:grid-cols-4" style={{ background: "rgba(255,255,255,0.05)" }}>
-            {stats.map((s) => (
-              <div key={s.label} className="flex flex-col gap-1 px-6 py-6 md:px-8" style={{ background: "#0c0c0e" }}>
-                <span className="font-serif font-light text-white" style={{ fontSize: "clamp(2rem, 4vw, 2.8rem)", letterSpacing: "-0.02em" }}>
-                  {s.value}
-                </span>
-                <span className="font-brand text-[0.55rem] tracking-[0.28em] text-white/35 uppercase">{s.label}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Thin rule */}
-        <div className="h-px w-full" style={{ background: "linear-gradient(90deg, transparent, rgba(184,148,63,0.2) 30%, rgba(184,148,63,0.2) 70%, transparent)" }} />
-
-        {/* ══ PILLARS ═══════════════════════════════════════════════════════════ */}
-        <section className="py-20 md:py-28">
-          <div className="mb-12 flex items-center gap-5">
-            <p className="font-brand text-[0.55rem] tracking-[0.38em] text-white/25 uppercase whitespace-nowrap">Five pillars</p>
-            <div className="h-px flex-1" style={{ background: "rgba(255,255,255,0.06)" }} />
-          </div>
-
-          <div className="flex flex-col gap-0">
-            {pillars.map((pillar, idx) => (
-              <article
-                key={pillar.code}
-                className="group relative"
-                style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
+      {/* ══ STATS ROW ═════════════════════════════════════════════════════════ */}
+      <section className="mx-auto max-w-6xl px-6 md:px-10">
+        <div
+          className="grid grid-cols-2 md:grid-cols-4 rounded-2xl overflow-hidden"
+          style={{ border: "1px solid rgba(255,255,255,0.07)" }}
+        >
+          {stats.map((s, i) => (
+            <div
+              key={s.label}
+              className="relative flex flex-col gap-1.5 px-7 py-8 md:px-10"
+              style={{
+                background: "rgba(255,255,255,0.025)",
+                borderRight: i < 3 ? "1px solid rgba(255,255,255,0.06)" : undefined,
+              }}
+            >
+              {/* Subtle gold accent top-left corner */}
+              <div
+                className="pointer-events-none absolute top-0 left-0 right-0 h-[1px]"
+                style={{ background: `linear-gradient(90deg, rgba(184,148,63,0.5), transparent 60%)` }}
+              />
+              <span
+                className="font-serif font-light text-white"
+                style={{ fontSize: "clamp(2.2rem, 4vw, 3rem)", letterSpacing: "-0.025em", lineHeight: 1 }}
               >
-                {/* Pillar header row */}
-                <div className="grid grid-cols-1 gap-6 py-10 md:grid-cols-12 md:gap-10 md:py-12">
-                  {/* Left: number + icon */}
-                  <div className="flex items-start gap-4 md:col-span-1 md:flex-col md:gap-3 md:pt-1">
-                    <span
-                      className="font-brand text-[0.52rem] tracking-[0.3em] uppercase"
-                      style={{ color: pillar.accentColor + "cc" }}
-                    >
-                      {pillar.code}
-                    </span>
-                    <span style={{ color: pillar.accentColor + "99" }}>{pillar.icon}</span>
-                  </div>
+                {s.value}
+              </span>
+              <span className="font-brand text-[0.52rem] tracking-[0.3em] text-white/30 uppercase">
+                {s.label}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
 
-                  {/* Center: title + tagline + body */}
-                  <div className="md:col-span-5">
+      {/* ══ PILLARS ═══════════════════════════════════════════════════════════ */}
+      <section className="mx-auto max-w-6xl px-6 md:px-10 pt-24 pb-10 md:pt-32">
+        <div className="mb-14 flex items-center gap-5">
+          <p className="font-brand text-[0.52rem] tracking-[0.4em] text-white/20 uppercase whitespace-nowrap">
+            Five pillars
+          </p>
+          <div className="h-px flex-1" style={{ background: "rgba(255,255,255,0.06)" }} />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          {pillars.map((pillar) => (
+            <article
+              key={pillar.code}
+              className="group relative overflow-hidden rounded-2xl"
+              style={{ border: "1px solid rgba(255,255,255,0.07)" }}
+            >
+              {/* Background image — subtle, very dark */}
+              <div className="absolute inset-0">
+                <Image
+                  src={pillar.image}
+                  alt={pillar.imageAlt}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 1200px"
+                  className="object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-[1.03]"
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: `linear-gradient(105deg, rgba(8,8,9,0.97) 0%, rgba(8,8,9,0.88) 40%, rgba(8,8,9,0.72) 70%, rgba(8,8,9,0.82) 100%)`,
+                  }}
+                />
+                {/* Accent colour wash from left */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                  style={{
+                    background: `radial-gradient(ellipse 55% 80% at -5% 50%, rgba(${pillar.accentRgb},0.14), transparent 65%)`,
+                  }}
+                />
+              </div>
+
+              {/* Accent top-border line */}
+              <div
+                className="absolute top-0 left-0 right-0 h-[1.5px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style={{ background: `linear-gradient(90deg, rgba(${pillar.accentRgb},0.9), transparent 60%)` }}
+              />
+
+              {/* Content */}
+              <div className="relative z-10 grid grid-cols-1 gap-8 p-8 md:grid-cols-12 md:gap-12 md:p-10 lg:p-12">
+
+                {/* Left — code + icon + title block */}
+                <div className="md:col-span-4 lg:col-span-3 flex flex-col justify-between gap-6">
+                  <div>
+                    <div className="flex items-center gap-3 mb-5">
+                      <span
+                        className="font-brand text-[0.5rem] tracking-[0.35em] uppercase"
+                        style={{ color: `rgba(${pillar.accentRgb},0.7)` }}
+                      >
+                        {pillar.code}
+                      </span>
+                      <div className="h-px flex-1" style={{ background: `rgba(${pillar.accentRgb},0.2)` }} />
+                    </div>
                     <h2
-                      className="font-serif font-light text-white group-hover:text-white transition-colors duration-300"
-                      style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)", letterSpacing: "-0.01em", lineHeight: 1.12 }}
+                      className="font-serif font-light text-white"
+                      style={{ fontSize: "clamp(1.9rem, 3vw, 2.8rem)", letterSpacing: "-0.015em", lineHeight: 1.08 }}
                     >
                       {pillar.title}
                     </h2>
                     <p
-                      className="mt-2 font-sans text-[0.7rem] tracking-[0.12em] uppercase"
-                      style={{ color: pillar.accentColor + "bb", fontWeight: 500 }}
+                      className="mt-3 font-sans text-[0.68rem] tracking-[0.1em] uppercase"
+                      style={{ color: `rgba(${pillar.accentRgb},0.75)`, fontWeight: 500 }}
                     >
                       {pillar.tagline}
                     </p>
-                    <p className="mt-4 font-sans text-sm leading-relaxed text-white/50 md:text-[0.9rem]" style={{ fontWeight: 300, maxWidth: "46ch" }}>
+                    <p
+                      className="mt-4 font-sans text-[0.85rem] leading-relaxed"
+                      style={{ fontWeight: 300, color: "rgba(246,242,233,0.45)", maxWidth: "36ch" }}
+                    >
                       {pillar.body}
                     </p>
                   </div>
 
-                  {/* Right: sub-service list */}
-                  <div className="md:col-span-6">
-                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                      {pillar.services.map((svc) => (
-                        <ServiceCard
-                          key={svc.name}
-                          name={svc.name}
-                          desc={svc.desc}
-                          accentColor={pillar.accentColor}
-                        />
-                      ))}
-                    </div>
+                  <Link
+                    href="/contact"
+                    className="inline-flex w-fit items-center gap-2.5 rounded-full border px-5 py-2.5 font-sans text-[0.6rem] tracking-[0.2em] uppercase transition-all duration-300 hover:opacity-90"
+                    style={{
+                      borderColor: `rgba(${pillar.accentRgb},0.35)`,
+                      color: `rgba(${pillar.accentRgb},0.9)`,
+                      background: `rgba(${pillar.accentRgb},0.07)`,
+                    }}
+                  >
+                    Enquire
+                    <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                      <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </Link>
+                </div>
+
+                {/* Right — service cards grid */}
+                <div className="md:col-span-8 lg:col-span-9">
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                    {pillar.services.map((svc) => (
+                      <ServiceCard
+                        key={svc.name}
+                        name={svc.name}
+                        desc={svc.desc}
+                        accentColor={pillar.accentColor}
+                        accentRgb={pillar.accentRgb}
+                      />
+                    ))}
                   </div>
                 </div>
 
-                {/* Accent line — bottom of each pillar */}
-                {idx === pillars.length - 1 && (
-                  <div className="h-px w-full" style={{ background: "rgba(255,255,255,0.06)" }} />
-                )}
-              </article>
-            ))}
-          </div>
-        </section>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
 
-        {/* ══ BESPOKE STRIP ════════════════════════════════════════════════════ */}
-        <section
-          className="relative overflow-hidden rounded-3xl border mb-8"
-          style={{ borderColor: "rgba(184,148,63,0.15)", background: "rgba(184,148,63,0.04)" }}
-        >
-          {/* Corner accent */}
+      {/* ══ BESPOKE CTA — full-width cinematic strip ══════════════════════════ */}
+      <section className="relative overflow-hidden mt-16">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=2000&q=85"
+            alt="Aerial view of a winding road through lush mountain landscape"
+            fill
+            sizes="100vw"
+            className="object-cover object-center"
+          />
           <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 rounded-3xl"
+            className="absolute inset-0"
             style={{
-              background: "radial-gradient(ellipse 60% 55% at 90% 50%, rgba(184,148,63,0.09), transparent 65%)",
+              background:
+                "linear-gradient(105deg, rgba(8,8,9,0.96) 0%, rgba(8,8,9,0.82) 50%, rgba(8,8,9,0.70) 100%)",
             }}
           />
-          <div className="relative z-10 grid grid-cols-1 gap-10 p-8 md:grid-cols-2 md:items-center md:p-14">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse 65% 70% at 85% 50%, rgba(184,148,63,0.12), transparent 60%)",
+            }}
+          />
+        </div>
+
+        {/* Top + bottom fades */}
+        <div className="absolute top-0 left-0 right-0 h-24" style={{ background: "linear-gradient(to bottom, #080809, transparent)" }} />
+        <div className="absolute bottom-0 left-0 right-0 h-24" style={{ background: "linear-gradient(to top, #080809, transparent)" }} />
+
+        <div className="relative z-10 mx-auto max-w-6xl px-6 py-28 md:px-10 md:py-36">
+          <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:items-center">
             <div>
-              <p className="font-brand text-[0.55rem] tracking-[0.38em] text-imxGold uppercase mb-4">
+              <p className="font-brand text-[0.55rem] tracking-[0.42em] text-imxGold uppercase mb-5">
                 Bespoke by default
               </p>
               <h2
                 className="font-serif font-light text-white"
-                style={{ fontSize: "clamp(1.8rem, 3.5vw, 3rem)", lineHeight: 1.1, letterSpacing: "-0.01em" }}
+                style={{ fontSize: "clamp(2rem, 4vw, 3.6rem)", lineHeight: 1.06, letterSpacing: "-0.015em" }}
               >
                 Most clients use more than one pillar.
               </h2>
-              <p className="mt-4 font-sans text-sm leading-relaxed text-white/50 md:text-[0.9rem]" style={{ fontWeight: 300, maxWidth: "44ch" }}>
-                A student going abroad needs study advisory, visa support, and flight logistics.
-                A family holiday often combines leisure planning, multi-country routing, and insurance.
-                Tell us the outcome — we will architect the right combination.
-              </p>
-            </div>
-            <div className="flex flex-col gap-4 md:items-end">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-3 rounded-full border px-8 py-4 font-sans text-[0.68rem] tracking-[0.25em] text-imxGold uppercase transition-all duration-300 hover:bg-imxGold/15"
-                style={{ borderColor: "rgba(184,148,63,0.5)", background: "rgba(184,148,63,0.08)" }}
+              <p
+                className="mt-5 font-sans text-[0.88rem] leading-relaxed text-white/50"
+                style={{ fontWeight: 300, maxWidth: "46ch" }}
               >
-                Talk to a consultant
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                  <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </Link>
-              <p className="font-sans text-[0.58rem] tracking-[0.14em] text-white/20 md:text-right">
-                Free first consultation. No obligation.
+                A student going abroad needs study advisory, visa support, and flight
+                logistics. A family holiday often combines leisure planning, multi-country
+                routing, and insurance. Tell us the outcome — we'll architect the right
+                combination.
               </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-3 rounded-full border px-8 py-4 font-sans text-[0.68rem] tracking-[0.25em] text-imxGold uppercase transition-all duration-300 hover:bg-imxGold/15"
+                  style={{ borderColor: "rgba(184,148,63,0.55)", background: "rgba(184,148,63,0.09)" }}
+                >
+                  Talk to a consultant
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </Link>
+                <p className="flex items-center font-sans text-[0.58rem] tracking-[0.14em] text-white/22">
+                  Free first consultation. No obligation.
+                </p>
+              </div>
+            </div>
+
+            {/* Right: feature list */}
+            <div className="flex flex-col gap-4">
+              {[
+                { label: "No fixed packages", detail: "Every itinerary is designed from scratch around your goals." },
+                { label: "Cross-pillar expertise", detail: "One team manages everything — no handoffs, no gaps." },
+                { label: "End-to-end ownership", detail: "From the first call to the last transfer, we are accountable." },
+              ].map((item) => (
+                <div
+                  key={item.label}
+                  className="flex items-start gap-4 rounded-xl p-5"
+                  style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}
+                >
+                  <div
+                    className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full"
+                    style={{ background: "rgba(184,148,63,0.15)", border: "1px solid rgba(184,148,63,0.3)" }}
+                  >
+                    <svg width="8" height="8" viewBox="0 0 10 8" fill="none">
+                      <path d="M1 4l3 3 5-6" stroke="rgba(184,148,63,0.9)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="font-brand text-[0.58rem] tracking-[0.2em] text-white/80 uppercase mb-1">{item.label}</p>
+                    <p className="font-sans text-[0.8rem] leading-relaxed text-white/38" style={{ fontWeight: 300 }}>{item.detail}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* ══ BOTTOM SPACER ════════════════════════════════════════════════════ */}
-        <div className="pb-16" />
+      {/* Bottom page padding */}
+      <div className="h-16 bg-[#080809]" />
 
-      </div>
     </main>
   );
 }

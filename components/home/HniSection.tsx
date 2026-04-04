@@ -192,7 +192,7 @@ export default function HniSection() {
                 {item.body}
               </p>
               <Link
-                href="#contact"
+                href="/contact"
                 className="inline-flex items-center gap-3 font-brand text-[0.74rem] font-bold tracking-[0.23em] text-imxGold/90 uppercase transition-colors hover:text-imxLight"
               >
                 Enquire Privately{" "}

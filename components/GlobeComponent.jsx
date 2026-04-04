@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import * as THREE from "three";
 
 const Globe = dynamic(() => import("react-globe.gl"), {
   ssr: false,
@@ -134,7 +133,9 @@ export default function GlobeComponent() {
   const [hoveredCountry, setHoveredCountry] = useState(null);
   const [hoveredLocation, setHoveredLocation] = useState(null);
   const [clickedLocationId, setClickedLocationId] = useState(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const mousePositionRef = useRef({ x: 0, y: 0 });
+  const tooltipRef = useRef(null);
+  const shellRef = useRef(null);
 
   const pointsData = useMemo(() => LOCATIONS, []);
   const arcsData = useMemo(() => ARCS, []);
@@ -193,11 +194,29 @@ export default function GlobeComponent() {
     };
   }, []);
 
+  // Pause globe autoRotate when scrolled out of view
+  useEffect(() => {
+    const el = shellRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const controls = globeRef.current?.controls?.();
+        if (controls) {
+          controls.autoRotate = entry.isIntersecting;
+        }
+      },
+      { threshold: 0.1 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   const handleMouseMove = useCallback((event) => {
-    setMousePosition({
-      x: event.clientX,
-      y: event.clientY,
-    });
+    mousePositionRef.current = { x: event.clientX, y: event.clientY };
+    if (tooltipRef.current) {
+      tooltipRef.current.style.left = event.clientX + 18 + "px";
+      tooltipRef.current.style.top  = event.clientY + 18 + "px";
+    }
   }, []);
 
   const handleMouseLeave = useCallback(() => {
@@ -275,9 +294,13 @@ export default function GlobeComponent() {
   );
 
   const handlePolygonHover = useCallback((polygon) => {
+    if (!polygon) {
+      setHoveredCountry(null);
+      return;
+    }
     const countryName = normalizeCountryName(polygon?.properties?.name);
     if (CLICKABLE_COUNTRY_KEYS.has(countryName)) {
-      setHoveredCountry(polygon || null);
+      setHoveredCountry(polygon);
       return;
     }
     setHoveredCountry(null);
@@ -285,6 +308,7 @@ export default function GlobeComponent() {
 
   const handlePolygonClick = useCallback(
     (polygon) => {
+      if (!polygon) return;
       const countryName = normalizeCountryName(polygon?.properties?.name);
       if (!countryName) {
         return;
@@ -304,17 +328,22 @@ export default function GlobeComponent() {
     const scene = globeRef.current.scene?.();
     if (!scene) return;
 
-    if (!scene.getObjectByName("imx-globe-dir-light")) {
-      const directional = new THREE.DirectionalLight(0xffffff, 1.2);
-      directional.name = "imx-globe-dir-light";
-      directional.position.set(5, 3, 5);
-      scene.add(directional);
-    }
+    // Get THREE from the globe's THREE variable (exposed globally by globe.gl)
+    if (typeof window !== "undefined" && window.THREE) {
+      const THREE = window.THREE;
 
-    if (!scene.getObjectByName("imx-globe-ambient-light")) {
-      const ambient = new THREE.AmbientLight(0x404040, 0.6);
-      ambient.name = "imx-globe-ambient-light";
-      scene.add(ambient);
+      if (!scene.getObjectByName("imx-globe-dir-light")) {
+        const directional = new THREE.DirectionalLight(0xffffff, 1.2);
+        directional.name = "imx-globe-dir-light";
+        directional.position.set(5, 3, 5);
+        scene.add(directional);
+      }
+
+      if (!scene.getObjectByName("imx-globe-ambient-light")) {
+        const ambient = new THREE.AmbientLight(0x404040, 0.6);
+        ambient.name = "imx-globe-ambient-light";
+        scene.add(ambient);
+      }
     }
 
     const controls = globeRef.current.controls();
@@ -353,6 +382,7 @@ export default function GlobeComponent() {
 
   return (
     <div
+      ref={shellRef}
       className={`globe-shell ${hoveredLocation ? "hotspot" : ""}`}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -360,14 +390,18 @@ export default function GlobeComponent() {
       <div className="star-layer" />
       <div className="aurora-layer" />
       <div className="vignette-layer" />
+      <div className="red-halo-layer" />
       <div className="fx-overlay" />
 
       <Globe
         ref={globeRef}
         backgroundColor="rgba(0,0,0,0)"
+        rendererConfig={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
         globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
         bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
         showAtmosphere={false}
+        globeCurvatureResolution={8}
+        onGlobeClick={() => {}}
         onGlobeReady={handleGlobeReady}
         pointsData={pointsData}
         pointsMerge={false}
@@ -444,11 +478,8 @@ export default function GlobeComponent() {
 
       {tooltipContent && (
         <div
+          ref={tooltipRef}
           className="tooltip"
-          style={{
-            left: mousePosition.x + 18,
-            top: mousePosition.y + 18,
-          }}
         >
           <div className="tooltip-name">{tooltipContent.title}</div>
           <div className="tooltip-detail">{tooltipContent.body}</div>
@@ -518,6 +549,22 @@ export default function GlobeComponent() {
           background:
             radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.35) 78%),
             linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.52));
+        }
+
+        .red-halo-layer {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          z-index: 2;
+          background:
+            radial-gradient(
+              circle at 52% 52%,
+              rgba(255, 96, 118, 0.06) 0%,
+              rgba(255, 74, 108, 0.05) 28%,
+              rgba(255, 74, 108, 0.018) 46%,
+              rgba(255, 74, 108, 0) 60%
+            );
+          filter: blur(3px);
         }
 
         .fx-overlay {
