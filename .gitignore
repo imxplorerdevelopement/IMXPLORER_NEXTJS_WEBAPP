@@ -43,3 +43,11 @@ next-env.d.ts
 # editor / agent config (contains API keys)
 .mcp.json
 .claude/
+
+# internal docs
+CLAUDE.md
+AGENTS.md
+MEMORY.md
+
+# scratch files
+contact\ (2).html
