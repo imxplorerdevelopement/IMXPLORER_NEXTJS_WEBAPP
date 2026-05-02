@@ -214,7 +214,7 @@ export default function Day3Homepage() {
       <section className="relative flex h-[100dvh] w-full flex-col overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.unsplash.com/photo-1488085061387-422e29b40080?auto=format&fit=crop&q=85&w=2400"
+            src="/assets/images/hero-bg.jpg"
             alt=""
             fill
             priority
